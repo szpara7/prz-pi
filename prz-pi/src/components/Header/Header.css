@@ -1,0 +1,6 @@
+.header-border{
+  border-bottom: #5CB85C;
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+  box-shadow: 4px, 10px, #5CB85C;
+}
