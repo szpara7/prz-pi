@@ -1,9 +1,34 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './Header.css';
+import { fetchIdeasBySearchFilter, fetchIdeaList } from '../../actions/ideaActions.js';
 
 class Header extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            searchExpression: ''
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        this.setState({
+            searchExpression: e.target.value
+        });
+        if(e.target.value !== ''){
+            this.props.search(e.target.value);
+        }
+        else {
+            this.props.allIdeas();
+        }
+        
+    }
+
     render() {
         const style = { "textDecoration": "none" };
         return (
@@ -30,7 +55,7 @@ class Header extends Component {
                             </li>
                         </ul>
                         <div className="form-inline my-2 my-lg-0">
-                            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Wyszukaj" />
+                            <input className="form-control mr-sm-2" onChange={this.handleChange} value={this.state.searchExpression} type="search" placeholder="Search" aria-label="Wyszukaj" />
                         </div>
                     </div>
                 </nav>
@@ -39,4 +64,15 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const mapDispatchToProps = dispatch => {
+    return{
+        search: text => {
+             dispatch(fetchIdeasBySearchFilter(text));
+            },
+        allIdeas: () => { 
+            dispatch(fetchIdeaList());
+        }
+    };
+}
+
+export default connect(null, mapDispatchToProps)(Header);
