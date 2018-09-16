@@ -4,27 +4,48 @@ const initialState = { ideas: [], isLoading: false };
 
 const ideaReducer = (state = initialState, action) => {
     switch (action.type) {
-        case IDEA_CONSTS.FETCH_IDEAS_BY_SEARCH:
+        case IDEA_CONSTS.FETCH_IDEA_REQUEST:
             return state = {
                 ...state,
-                ideas: [...action.state]
+                isLoading: true
             };
 
-        case IDEA_CONSTS.FETCH_IDEA_LIST:
+
+        case IDEA_CONSTS.FETCH_IDEA_SUCCESS:
             return state = {
                 ...state,
                 ideas: [...action.ideas],
                 isLoading: false
             };
 
-        case IDEA_CONSTS.START_FETCHING_IDEA_LIST:
+        case IDEA_CONSTS.FETCH_IDEA_FAILURE:
             return state = {
                 ...state,
-                isLoading: true
+                isLoading: false
+            };
+
+        case IDEA_CONSTS.UPDATE_IDEA_REQUEST:
+            return state = {
+                ...state,
+                ideas: [...state.ideas.filter(t => t.id !== action.idea.id), action.idea].sort((a, b) => {
+                    return a.id - b.id;
+                })
+            };
+
+        case IDEA_CONSTS.UPDATE_IDEA_SUCCESS:
+            return state = {
+                ...state
+            };
+
+        case IDEA_CONSTS.UPDATE_IDEA_FAILURE:
+            return state = {
+                ...state,
+                ideas: [...state.ideas.filter(t => t.id !== action.idea.id), action.idea].sort((a, b) => {
+                    return a.id - b.id;
+                })
             };
 
         default: return state;
-
     }
 };
 

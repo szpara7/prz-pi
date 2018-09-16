@@ -1,4 +1,6 @@
 .modal-transparent {
     background-color: rgba(0, 0, 0, .0001) !important;
     border: none !important;
+    text-align: center;
+    vertical-align: middle;
 }

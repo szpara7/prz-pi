@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import LoadingModal from '../LoadingModal/LoadingModal.jsx';
+import IdeaItem from '../IdeaItem/IdeaItem.jsx';
+import './IdeaContent.css';
 
 class IdeaContent extends Component {
     constructor(props) {
@@ -16,9 +18,11 @@ class IdeaContent extends Component {
         return (
             <div className="container">
                 <LoadingModal isLoading={this.props.isLoading}></LoadingModal>
-                {this.props.ideas.map((item, key) => 
-                    <h1 key={key}>{item.title}</h1>
-                )}
+                <div className="row container-border justify-content-around">
+                    {this.props.ideas.map((item, key) =>
+                        <IdeaItem idea={item} key={key} />
+                    )}
+                </div>
             </div>
         );
     }

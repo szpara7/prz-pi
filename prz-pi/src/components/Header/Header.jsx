@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './Header.css';
-import { fetchIdeasBySearchFilter, fetchIdeaList } from '../../actions/ideaActions.js';
+import { fetchIdeaList } from '../../actions/ideaActions.js';
 
 class Header extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -20,13 +20,8 @@ class Header extends Component {
         this.setState({
             searchExpression: e.target.value
         });
-        if(e.target.value !== ''){
-            this.props.search(e.target.value);
-        }
-        else {
-            this.props.allIdeas();
-        }
-        
+
+        this.props.allIdeas();
     }
 
     render() {
@@ -65,11 +60,8 @@ class Header extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-    return{
-        search: text => {
-             dispatch(fetchIdeasBySearchFilter(text));
-            },
-        allIdeas: () => { 
+    return {
+        allIdeas: () => {
             dispatch(fetchIdeaList());
         }
     };

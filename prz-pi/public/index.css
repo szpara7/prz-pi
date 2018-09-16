@@ -2,6 +2,10 @@ html, body {
     height: 100%;
 }
 
+body {
+    background-color: rgb(96, 105, 96);
+}
+
 a {
     text-decoration-style: none !important;
     text-decoration-line: none !important;
