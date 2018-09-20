@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import './IdeaItem.css';
 import RatingBox from '../RatingBox/RatingBox.jsx';
-import { updateIdea } from '../../actions/ideaActions.js';
 
-class IdeaItem extends Component {
+
+export default class IdeaItem extends Component {
     constructor(props) {
         super(props);
-
-        this.addLike = this.addLike.bind(this);
-        this.addDislike = this.addDislike.bind(this);
     }
 
     addLike() {
-        const newIdea = this.props.idea;
+        const newIdea = Object.assign({}, this.props.idea);
         newIdea.likes += 1;
 
         this.props.updateIdea(this.props.idea, newIdea);
     }
 
     addDislike() {
-        const newIdea = this.props.idea;
+        const newIdea = Object.assign({}, this.props.idea);
         newIdea.dislikes += 1;
 
         this.props.updateIdea(this.props.idea, newIdea);
@@ -48,11 +43,3 @@ class IdeaItem extends Component {
         );
     }
 }
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateIdea: (oldIdea, newIdea) => dispatch(updateIdea(oldIdea, newIdea))
-    };
-}
-
-export default withRouter(connect(null, mapDispatchToProps) (IdeaItem));

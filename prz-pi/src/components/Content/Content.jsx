@@ -6,11 +6,10 @@ import TodoContent from '../TodoContent/TodoContent.jsx';
 import InProgressContent from '../InProgressContent/InProgressContent.jsx';
 import DoneContent from '../TodoContent/TodoContent.jsx';
 
-
 class Content extends Component {
 	render() {
 		return (
-			<div className="container-fluid">
+			<div className="container-fluid">	
 				<Redirect from='/' to='/idea' />
 				<Route exact path='/idea' component={IdeaContainer} />
 				<Route path='/todo' component={TodoContent} />

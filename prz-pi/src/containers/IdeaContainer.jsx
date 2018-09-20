@@ -1,13 +1,14 @@
+import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { connect} from 'react-redux';
 
 import IdeaContent from '../components/IdeaContent/IdeaContent.jsx';
 import { fetchIdeaList } from '../actions/ideaActions.js';
 
 const mapStateToProps = (state) => {
     return {
-        ideas: state.idea.ideas,
-        isLoading: state.idea.isLoading
+        isLoading: state.idea.isLoading,
+        ideas: state.idea.ideas
     };
 }
 
@@ -17,5 +18,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(IdeaContent));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps) (IdeaContent));

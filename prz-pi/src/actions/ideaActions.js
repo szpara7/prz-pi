@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 import { API_URL } from '../globalSettings.js';
+import { NOTIFICATION_ACTIONS } from '../actions/notificationsActions.js';
+import responseMessages from '../responseMessages.js';
 
 export const IDEA_CONSTS = {
     FETCH_IDEA_REQUEST: 'FETCH_IDEA_REQUEST',
@@ -11,17 +13,19 @@ export const IDEA_CONSTS = {
     UPDATE_IDEA_FAILURE: 'UPDATE_IDEA_FAILURE'
 };
 
-export const IDEA_ACTIONS = {
-    fetchIdeaList
-}
 
 export const fetchIdeaList = () => {
-    
+
     return (dispatch) => {
         dispatch(fetch_idea_request());
         axios.get(API_URL + "/models/idea")
-            .then(s => dispatch(fetch_idea_success(s.data)))
-            .catch (e => dispatch(fetch_idea_failure(e)));
+            .then(s => {
+                dispatch(fetch_idea_success(s.data));
+            })
+            .catch(e => {
+                dispatch(fetch_idea_failure(e));
+                dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.FETCH_IDEA_FAILURE));
+            })
     }
 }
 
@@ -32,10 +36,14 @@ export const updateIdea = (oldIdea, newIdea) => {
     return (dispatch) => {
         dispatch(update_idea_request(copyNewIdea));
         axios.put(`${API_URL}/models/${copyNewIdea.id}`, copyNewIdea)
-        .then(s => dispatch(update_idea_success(s.data)))
-        .catch(err => dispatch(update_idea_failure(err, copyOldIdea)));
+            .then(s => dispatch(update_idea_success(s.data)))
+            .catch(err => {
+                dispatch(update_idea_failure(err, copyOldIdea));
+                dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.UPDATE_IDEA_FAILURE));
+            })
     }
 }
+
 
 
 function fetch_idea_request() { return { type: IDEA_CONSTS.FETCH_IDEA_REQUEST }; }
@@ -44,4 +52,4 @@ function fetch_idea_failure(error) { return { type: IDEA_CONSTS.FETCH_IDEA_FAILU
 
 function update_idea_request(idea) { return { type: IDEA_CONSTS.UPDATE_IDEA_REQUEST, idea: idea }; }
 function update_idea_success(idea) { return { type: IDEA_CONSTS.UPDATE_IDEA_SUCCESS, idea: idea }; }
-function update_idea_failure(error, oldIdea) { return { type: IDEA_CONSTS.UPDATE_IDEA_FAILURE, error : error, idea: oldIdea }; }
+function update_idea_failure(error, oldIdea) { return { type: IDEA_CONSTS.UPDATE_IDEA_FAILURE, error: error, idea: oldIdea }; }

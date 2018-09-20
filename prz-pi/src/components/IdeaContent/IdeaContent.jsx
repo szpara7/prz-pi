@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import LoadingModal from '../LoadingModal/LoadingModal.jsx';
-import IdeaItem from '../IdeaItem/IdeaItem.jsx';
 import './IdeaContent.css';
+import IdeaItem from './../IdeaItem/IdeaItem.jsx';
 
 class IdeaContent extends Component {
     constructor(props) {
