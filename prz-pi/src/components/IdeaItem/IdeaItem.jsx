@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './IdeaItem.css';
 import RatingBox from '../RatingBox/RatingBox.jsx';
+import { updateIdea, deleteIdea } from '../../actions/ideaActions.js';
 
-
-export default class IdeaItem extends Component {
+class IdeaItem extends Component {
     constructor(props) {
         super(props);
+
+        this.addLike = this.addLike.bind(this);
+        this.addDislike = this.addDislike.bind(this);
+        this.deleteIdea = this.deleteIdea.bind(this);
     }
 
     addLike() {
@@ -23,12 +30,26 @@ export default class IdeaItem extends Component {
         this.props.updateIdea(this.props.idea, newIdea);
     }
 
+    deleteIdea(event) {
+        event.stopPropagation();
+        alert("HEHESZKI");
+        // this.props.deleteIdea(this.props.idea.id);
+    }
+
     render() {
         return (
             <div className="col-sm-12 col-md-6 mt-4">
                 <div className="item p-2">
-                    <div className="d-flex justify-content-center">
-                        <h4>{this.props.idea.title}</h4>
+                    <div className="clearfix">
+                        <h4 className="float-left">{this.props.idea.title}</h4>
+                        <div className="p-2 float-right dot-action dropright" data-toggle="dropdown"role="button" aria-haspopup="true" aria-expanded="false">
+                            <i className="fas fa-ellipsis-v fa-2x"></i>
+                            <ul className="dropdown-menu border-0 rounded-0">
+                               <li><a href="#" className="btn btn-outline-dark border-0 w-100 rounded-0">MOVE</a></li>
+                               <li><a href="#" className="btn btn-outline-dark border-0 w-100 rounded-0">EDIT</a></li>
+                               <li><a href="#" className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.deleteIdea}>DELETE</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div className="d-flex justify-content-around text-justify">
                         <p>
@@ -43,3 +64,24 @@ export default class IdeaItem extends Component {
         );
     }
 }
+
+IdeaItem.propTypes = {
+    updateIdea: PropTypes.func.isRequired,
+    deleteIdea: PropTypes.func.isRequired,
+    idea: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        likes: PropTypes.number.isRequired,
+        dislikes: PropTypes.number.isRequired
+    })
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateIdea: (oldIdea, newIdea) => dispatch(updateIdea(oldIdea, newIdea)),
+        deleteIdea: (id) => dispatch(deleteIdea(id))
+    };
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(IdeaItem));

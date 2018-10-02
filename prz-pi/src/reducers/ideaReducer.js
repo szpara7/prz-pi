@@ -1,6 +1,6 @@
 import { IDEA_CONSTS } from '../actions/ideaActions.js';
 
-const initialState = { ideas: [], isLoading: false };
+const initialState = { ideas: [], isLoading: false, isCreateIdeaBoxOpen: false };
 
 const ideaReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -9,7 +9,6 @@ const ideaReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: true
             };
-
 
         case IDEA_CONSTS.FETCH_IDEA_SUCCESS:
             return state = {
@@ -22,6 +21,19 @@ const ideaReducer = (state = initialState, action) => {
             return state = {
                 ...state,
                 isLoading: false
+            };
+
+        case IDEA_CONSTS.CREATE_IDEA_SUCCESS:
+            return state = {
+                ...state,
+                ideas: [...state.ideas.filter(t => t.id !== action.idea.id), action.idea].sort((a, b) => {
+                    return a.id - b.id;
+                })
+            };
+
+        case IDEA_CONSTS.CREATE_IDEA_FAILURE:
+            return state = {
+                ...state
             };
 
         case IDEA_CONSTS.UPDATE_IDEA_REQUEST:
@@ -45,6 +57,31 @@ const ideaReducer = (state = initialState, action) => {
                 })
             };
 
+        case IDEA_CONSTS.CREATE_IDEA_BOX_SHOW:
+            return state = {
+                ...state,
+                isCreateIdeaBoxOpen: true
+            };
+
+        case IDEA_CONSTS.CREATE_IDEA_BOX_HIDE:
+            return state = {
+                ...state,
+                isCreateIdeaBoxOpen: false
+            };
+
+        case IDEA_CONSTS.DELETE_IDEA_SUCCESS:
+            return state = {
+                ...state,
+                ideas: [...state.ideas.filter(t => t.id !== action.id)].sort((a, b) => {
+                    return a.id - b.id;
+                })
+            };
+        
+        case IDEA_CONSTS.DELETE_IDEA_FAILURE: 
+            return state = {
+                ...state
+            };
+        
         default: return state;
     }
 };

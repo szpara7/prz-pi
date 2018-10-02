@@ -1,4 +1,7 @@
 .item {
     background-color: lightgray;
-        
+}
+
+.dot-action:hover {
+    color: aquamarine;
 }

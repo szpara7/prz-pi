@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header/Header.jsx';
 import Content from './components/Content/Content.jsx';
 import Footer from './components/Footer/Footer.jsx';
-import NotificationBoxContainer from './containers/NorificationBoxContainer.jsx';
+import NotificationBoxContainer from './containers/NotificationBoxContainer.jsx';
 
 class App extends Component {
   render() {

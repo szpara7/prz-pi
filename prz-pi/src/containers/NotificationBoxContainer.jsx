@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import NotificationBox from '../components/NotificationBox/NotificationBox.jsx';
-import { NOTIFICATION_ACTIONS } from './../actions/notificationsActions.js';
+import NotificationBox from '../components/NotificationBox/NotificationBox';
+import { NOTIFICATION_ACTIONS } from '../actions/notificationsActions';
 
 const mapStateToProps = (state) => {
     return {

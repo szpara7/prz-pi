@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './Header.css';
 import { fetchIdeaList } from '../../actions/ideaActions.js';
@@ -57,6 +58,10 @@ class Header extends Component {
             </div>
         );
     }
+}
+
+Header.propTypes = {
+    allIdeas : PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = dispatch => {

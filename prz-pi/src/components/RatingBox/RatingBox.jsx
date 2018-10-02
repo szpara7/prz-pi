@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './RatingBox.css';
 
 class RatingBox extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     render() {
@@ -16,5 +17,10 @@ class RatingBox extends React.Component {
         );
     }
 }
+
+RatingBox.propTypes = {
+    onLikeClick: PropTypes.func.isRequired,
+    onDislikeClick: PropTypes.func.isRequired
+};
 
 export default RatingBox;

@@ -19,6 +19,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "prop-types": "^15.6.2",
     "redux-thunk": "^2.3.0"
   }
 }

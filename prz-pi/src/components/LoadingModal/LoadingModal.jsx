@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 
 import '../LoadingModal/LoadingModal.css';
 
@@ -23,5 +24,9 @@ class LoadingModal extends Component {
         );
     }
 }
+
+LoadingModal.propTypes = {
+    isLoading: PropTypes.bool.isRequired
+};
 
 export default LoadingModal;

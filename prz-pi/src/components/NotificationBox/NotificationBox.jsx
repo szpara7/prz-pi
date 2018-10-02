@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './NotificationBox.css';
 import { NOTIFICATION_CONSTS } from '../../actions/notificationsActions.js';
@@ -45,5 +46,9 @@ class NotificationBox extends Component {
         }
     }
 }
+
+NotificationBox.propTypes = {
+    show: PropTypes.bool.isRequired
+};
 
 export default NotificationBox;
