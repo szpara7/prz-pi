@@ -24,19 +24,17 @@ class IdeaCreate extends Component {
             this.setState({
                 title: '',
                 description: ''
-            });
+            });           
         }
         else {
             this.props.create_idea_box_show();
-            window.scrollTo(0, 0);
+            window.scrollTo(0, 56);
 
             this.setState({
                 title: '',
                 description: ''
             });
-        }
-
- 
+        } 
     }
 
     handleInput(e) {
@@ -54,7 +52,7 @@ class IdeaCreate extends Component {
             modelStatus: 1,
             likes: 0,
             dislikes: 0
-        };
+        };     
 
         this.props.createIdea(idea);
     }
@@ -77,7 +75,7 @@ class IdeaCreate extends Component {
         }
         else {
             return (
-                <div className="h-100 idea-create-form bg-secondary float-lg-left p-3 col-sm-12 col-lg-3">
+                <div ref={e => this.box = e} className="h-100 idea-create-form bg-secondary float-lg-left p-3 col-sm-12 col-lg-3">
                     <div className="justify-content-around">
                         <form onSubmit={this.handleSubmit}>
                             <h2>CREATE IDEA</h2>
