@@ -30,10 +30,8 @@ class IdeaItem extends Component {
         this.props.updateIdea(this.props.idea, newIdea);
     }
 
-    deleteIdea(event) {
-        event.stopPropagation();
-        alert("HEHESZKI");
-        // this.props.deleteIdea(this.props.idea.id);
+    deleteIdea(e) {        
+        this.props.deleteIdea(this.props.idea.id);
     }
 
     render() {
@@ -42,13 +40,13 @@ class IdeaItem extends Component {
                 <div className="item p-2">
                     <div className="clearfix">
                         <h4 className="float-left">{this.props.idea.title}</h4>
-                        <div className="p-2 float-right dot-action dropright" data-toggle="dropdown"role="button" aria-haspopup="true" aria-expanded="false">
-                            <i className="fas fa-ellipsis-v fa-2x"></i>
-                            <ul className="dropdown-menu border-0 rounded-0">
-                               <li><a href="#" className="btn btn-outline-dark border-0 w-100 rounded-0">MOVE</a></li>
-                               <li><a href="#" className="btn btn-outline-dark border-0 w-100 rounded-0">EDIT</a></li>
-                               <li><a href="#" className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.deleteIdea}>DELETE</a></li>
-                            </ul>
+                        <div className="p-2 float-right dot-action dropleft">
+                            <i className="fas fa-ellipsis-v fa-2x" data-toggle="dropdown"></i>
+                            <div className="dropdown-menu dropdown-menu border-0 rounded-0">
+                                <button className="btn btn-outline-dark border-0 w-100 rounded-0">MOVE</button>
+                                <button className="btn btn-outline-dark border-0 w-100 rounded-0">EDIT</button>
+                                <button className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.deleteIdea}>DELETE</button>
+                            </div>
                         </div>
                     </div>
                     <div className="d-flex justify-content-around text-justify">

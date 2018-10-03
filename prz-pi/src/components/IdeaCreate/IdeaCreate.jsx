@@ -29,6 +29,11 @@ class IdeaCreate extends Component {
         else {
             this.props.create_idea_box_show();
             window.scrollTo(0, 0);
+
+            this.setState({
+                title: '',
+                description: ''
+            });
         }
 
  
