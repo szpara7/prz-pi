@@ -14,9 +14,11 @@ export const IDEA_CONSTS = {
     CREATE_IDEA_BOX_HIDE: 'CREATE_IDEA_BOX_HIDE',
     UPDATE_IDEA_REQUEST: 'UPDATE_IDEA_REQUEST',
     UPDATE_IDEA_SUCCESS: 'UPDATE_IDEA_SUCCESS',
+    UPDATE_IDEA_BOX_SHOW: 'UPDATE_IDEA_BOX_SHOW',
+    UPDATE_IDEA_BOX_HIDE: 'UPDATE_IDEA_BOX_HIDE',
     UPDATE_IDEA_FAILURE: 'UPDATE_IDEA_FAILURE',
     DELETE_IDEA_SUCCESS: 'DELETE_IDEA_SUCCESS',
-    DELETE_IDEA_FAILURE: 'DELETE_IDEA_FAILURE'
+    DELETE_IDEA_FAILURE: 'DELETE_IDEA_FAILURE',
 };
 
 
@@ -58,7 +60,11 @@ export const updateIdea = (oldIdea, newIdea) => {
     return (dispatch) => {
         dispatch(update_idea_request(copyNewIdea));
         axios.put(`${API_URL}/models/${copyNewIdea.id}`, copyNewIdea)
-            .then(s => dispatch(update_idea_success(s.data)))
+            .then(s => {
+                 dispatch(update_idea_success(s.data));
+                 dispatch(NOTIFICATION_ACTIONS.notification_success(responseMessages.UPDATE_IDEA_SUCCESS));
+                 dispatch(update_idea_box_hide());
+            })
             .catch(err => {
                 dispatch(update_idea_failure(err, copyOldIdea));
                 dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.UPDATE_IDEA_FAILURE));
@@ -98,3 +104,6 @@ function delete_idea_failure() { return { type: IDEA_CONSTS.DELETE_IDEA_FAILURE 
 
 export function create_idea_box_show() { return { type: IDEA_CONSTS.CREATE_IDEA_BOX_SHOW }; }
 export function create_idea_box_hide() { return { type: IDEA_CONSTS.CREATE_IDEA_BOX_HIDE }; }
+
+export function update_idea_box_show(idea) { return { type: IDEA_CONSTS.UPDATE_IDEA_BOX_SHOW, idea:idea }; }
+export function update_idea_box_hide() { return { type: IDEA_CONSTS.UPDATE_IDEA_BOX_HIDE }; }

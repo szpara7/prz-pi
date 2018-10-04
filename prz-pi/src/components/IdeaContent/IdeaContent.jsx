@@ -5,6 +5,7 @@ import LoadingModal from '../LoadingModal/LoadingModal.jsx';
 import './IdeaContent.css';
 import IdeaItem from './../IdeaItem/IdeaItem.jsx';
 import IdeaCreateContainer from '../../containers/IdeaCreateContainer.jsx';
+import IdeaUpdateContainer from '../../containers/IdeaUpdateContainer.jsx';
 
 class IdeaContent extends Component {
     constructor(props) {
@@ -23,6 +24,7 @@ class IdeaContent extends Component {
                 {show &&
                     <React.Fragment>
                         <IdeaCreateContainer />
+                        <IdeaUpdateContainer />
                         <div className="container">
                             <div className="row container-border justify-content-between">
                                 {this.props.ideas.map((item, key) =>

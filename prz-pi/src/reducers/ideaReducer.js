@@ -1,6 +1,12 @@
 import { IDEA_CONSTS } from '../actions/ideaActions.js';
 
-const initialState = { ideas: [], isLoading: false, isCreateIdeaBoxOpen: false };
+const initialState = { 
+    ideas: [],
+    isLoading: false,
+    isCreateIdeaBoxOpen: false,
+    isUpdateIdeaBoxOpen: false,
+    ideaToUpdate : {}
+};
 
 const ideaReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -60,7 +66,8 @@ const ideaReducer = (state = initialState, action) => {
         case IDEA_CONSTS.CREATE_IDEA_BOX_SHOW:
             return state = {
                 ...state,
-                isCreateIdeaBoxOpen: true
+                isCreateIdeaBoxOpen: true,
+                isUpdateIdeaBoxOpen: false
             };
 
         case IDEA_CONSTS.CREATE_IDEA_BOX_HIDE:
@@ -81,7 +88,21 @@ const ideaReducer = (state = initialState, action) => {
             return state = {
                 ...state
             };
+
+        case IDEA_CONSTS.UPDATE_IDEA_BOX_SHOW:
+            return state = {
+                ...state,
+                isUpdateIdeaBoxOpen: true,
+                isCreateIdeaBoxOpen: false,
+                ideaToUpdate: action.idea
+            };
         
+        case IDEA_CONSTS.UPDATE_IDEA_BOX_HIDE:
+            return state = {
+                ...state,
+                isUpdateIdeaBoxOpen: false
+            };
+
         default: return state;
     }
 };

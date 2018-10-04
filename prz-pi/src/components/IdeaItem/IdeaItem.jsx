@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import './IdeaItem.css';
 import RatingBox from '../RatingBox/RatingBox.jsx';
-import { updateIdea, deleteIdea } from '../../actions/ideaActions.js';
+import { updateIdea, deleteIdea, update_idea_box_show } from '../../actions/ideaActions.js';
 
 class IdeaItem extends Component {
     constructor(props) {
@@ -14,6 +14,7 @@ class IdeaItem extends Component {
         this.addLike = this.addLike.bind(this);
         this.addDislike = this.addDislike.bind(this);
         this.deleteIdea = this.deleteIdea.bind(this);
+        this.update_idea_box_show = this.update_idea_box_show.bind(this);
     }
 
     addLike() {
@@ -34,6 +35,10 @@ class IdeaItem extends Component {
         this.props.deleteIdea(this.props.idea.id);
     }
 
+    update_idea_box_show() {
+        this.props.update_idea_box_show(this.props.idea);
+    }
+
     render() {
         return (
             <div className="col-sm-12 col-md-6 mt-4">
@@ -44,7 +49,7 @@ class IdeaItem extends Component {
                             <i className="fas fa-ellipsis-v fa-2x" data-toggle="dropdown"></i>
                             <div className="dropdown-menu dropdown-menu border-0 rounded-0">
                                 <button className="btn btn-outline-dark border-0 w-100 rounded-0">MOVE</button>
-                                <button className="btn btn-outline-dark border-0 w-100 rounded-0">EDIT</button>
+                                <button className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.update_idea_box_show}>EDIT</button>
                                 <button className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.deleteIdea}>DELETE</button>
                             </div>
                         </div>
@@ -66,6 +71,7 @@ class IdeaItem extends Component {
 IdeaItem.propTypes = {
     updateIdea: PropTypes.func.isRequired,
     deleteIdea: PropTypes.func.isRequired,
+    update_idea_box_show: PropTypes.func.isRequired,
     idea: PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
@@ -78,7 +84,8 @@ IdeaItem.propTypes = {
 const mapDispatchToProps = (dispatch) => {
     return {
         updateIdea: (oldIdea, newIdea) => dispatch(updateIdea(oldIdea, newIdea)),
-        deleteIdea: (id) => dispatch(deleteIdea(id))
+        deleteIdea: (id) => dispatch(deleteIdea(id)),
+        update_idea_box_show: (idea) => dispatch(update_idea_box_show(idea))
     };
 }
 
