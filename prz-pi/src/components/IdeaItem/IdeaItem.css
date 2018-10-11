@@ -5,3 +5,9 @@
 .dot-action:hover {
     color: aquamarine;
 }
+
+.todo-form {
+    background-color: blue;
+    z-index: 20;
+    position: absolute;
+}

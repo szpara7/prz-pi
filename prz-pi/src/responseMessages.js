@@ -6,5 +6,7 @@ export default {
     CREATE_IDEA_SUCCESS: "Idea została dodana",
     CREATE_IDEA_FAILUER: "Wystąpił błąd podczas dodawania idei",
     DELETE_IDEA_SUCCESS: "Idea została usunięta",
-    DELETE_IDEA_FAILURE: "Wystąpił błąd podczas próby usunięcia idei"
+    DELETE_IDEA_FAILURE: "Wystąpił błąd podczas próby usunięcia idei",
+    MOVE_TO_IDEA_SUCCESS: "Idea została przeniesiona do Todo",
+    MOVE_TO_TODO_FAILURE: "Wystąpił błąd podczas przenoszenia Idei do Todo"
 };

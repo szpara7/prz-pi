@@ -18,6 +18,11 @@ class IdeaUpdate extends Component {
     }
 
     closeForm() {
+        this.setState({
+            title: '',
+            description: ''
+        });
+
         this.props.update_idea_box_hide();
     }
 
@@ -30,8 +35,6 @@ class IdeaUpdate extends Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        const oldIdea = Object.assign({}, this.props.idea);
-
         const newIdea = {
             id: this.props.idea.id,
             title: this.state.title,
@@ -41,20 +44,27 @@ class IdeaUpdate extends Component {
             dislikes: this.props.idea.dislikes
         };
 
-        this.props.updateIdea(oldIdea, newIdea);
+        this.props.updateIdea(this.props.idea, newIdea);
     }
 
     static getDerivedStateFromProps(props, state) {
-        return {
-            title: props.idea.title,
-            description: props.idea.description
-        };
+
+        if(state.title !== props.idea.title && state.description !== props.idea.description)
+        {
+            if(props.idea.title !== undefined && props.idea.description !== undefined) {
+                return {
+                    title: props.idea.title,
+                    description: props.idea.description
+                };
+            }
+        }       
+
+        return null;
     }
 
     render() {
         
-        if (this.props.isUpdateIdeaBoxOpen) {
-            window.scrollTo(0, 56);
+        if (this.props.isUpdateIdeaBoxOpen) {           
 
             return (
                 <div className="h-100 idea-update-form bg-secondary float-lg-left p-3 col-sm-12 col-lg-3">
@@ -63,11 +73,11 @@ class IdeaUpdate extends Component {
                             <h2>UPDATE IDEA</h2>
                             <div className="form-group">
                                 <h4 htmlFor="title">Title</h4>
-                                <input type="text" name="title" className="form-control" onInput={this.handleInput} value={this.state.title} required />
+                                <input type="text" name="title" className="form-control" onChange={this.handleInput} value={this.state.title} required />
                             </div>
                             <div className="form-group">
                                 <h4 htmlFor="description">Description</h4>
-                                <input type="text" name="description" className="form-control" onInput={this.handleInput} value={this.state.description} required />
+                                <input type="text" name="description" className="form-control" onChange={this.handleInput} value={this.state.description} required />
                             </div>
                             <div className="btn-group-lg">
                                 <button type="button" className="btn btn-warning rounded-0 col-6" onClick={this.closeForm}><i className="fas fa-long-arrow-alt-left"></i> Back</button>
@@ -89,7 +99,5 @@ IdeaUpdate.propTypes = {
     update_idea_box_hide: PropTypes.func.isRequired,
     updateIdea: PropTypes.func.isRequired
 };
-
-polyfill(IdeaUpdate);
 
 export default IdeaUpdate;

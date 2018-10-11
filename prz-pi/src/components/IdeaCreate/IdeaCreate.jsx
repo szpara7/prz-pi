@@ -81,11 +81,11 @@ class IdeaCreate extends Component {
                             <h2>CREATE IDEA</h2>
                             <div className="form-group">
                                 <h4 htmlFor="title">Title</h4>
-                                <input type="text" name="title" className="form-control" onInput={this.handleInput} value={this.state.title} required />
+                                <input type="text" name="title" className="form-control" onChange={this.handleInput} value={this.state.title} required />
                             </div>
                             <div className="form-group">
                                 <h4 htmlFor="description">Description</h4>
-                                <input type="text" name="description" className="form-control" onInput={this.handleInput} value={this.state.description} required />
+                                <input type="text" name="description" className="form-control" onChange={this.handleInput} value={this.state.description} required />
                             </div>
                             <div className="btn-group-lg">
                                 <button type="button" className="btn btn-warning rounded-0 col-6" onClick={this.toggleForm}><i className="fas fa-long-arrow-alt-left"></i> Back</button>

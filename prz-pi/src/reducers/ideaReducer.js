@@ -103,6 +103,27 @@ const ideaReducer = (state = initialState, action) => {
                 isUpdateIdeaBoxOpen: false
             };
 
+        case IDEA_CONSTS.MOVE_TO_TODO_REQUEST:     
+            return state = {
+                ...state,
+                ideas: [...state.ideas.filter(t => t.id !== action.id)].sort((a, b) => {
+                    return a.id - b.id;
+                })
+            };
+
+        case IDEA_CONSTS.MOVE_TO_TODO_SUCCESS: 
+            return state = {
+                ...state
+            };
+
+        case IDEA_CONSTS.MOVE_TO_TODO_FAILURE:
+            return state = {
+                ...state,
+                ideas: [...state.ideas, action.idea].sort((a,b) => {
+                    return a.id - b.id
+                })
+            };
+
         default: return state;
     }
 };
