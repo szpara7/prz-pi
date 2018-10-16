@@ -28,7 +28,7 @@ class IdeaContent extends Component {
                         <IdeaUpdateContainer />
                         <div className="container">
                             <div className="row container-border justify-content-between">
-                                {this.props.ideas.map((item, key) =>
+                                {this.props.ideas.filter(t => t.title.includes(this.props.searchExpression)).map((item, key) =>
                                     <IdeaItem idea={item} key={key} />
                                 )}
                             </div>

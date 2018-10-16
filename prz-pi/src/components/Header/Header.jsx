@@ -4,25 +4,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import './Header.css';
-import { fetchIdeaList } from '../../actions/ideaActions.js';
 
-class Header extends Component {
+export default class Header extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            searchExpression: ''
-        };
 
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(e) {
-        this.setState({
-            searchExpression: e.target.value
-        });
-
-        this.props.allIdeas();
+        this.props.set_expression(e.target.value);
     }
 
     render() {
@@ -51,7 +42,7 @@ class Header extends Component {
                             </li>
                         </ul>
                         <div className="form-inline my-2 my-lg-0">
-                            <input className="form-control mr-sm-2" onChange={this.handleChange} value={this.state.searchExpression} type="search" placeholder="Search" aria-label="Wyszukaj" />
+                            <input className="form-control mr-sm-2" onChange={this.handleChange} type="search" placeholder="Search" aria-label="Wyszukaj" />
                         </div>
                     </div>
                 </nav>
@@ -61,15 +52,5 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-    allIdeas : PropTypes.func.isRequired
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        allIdeas: () => {
-            dispatch(fetchIdeaList());
-        }
-    };
-}
-
-export default connect(null, mapDispatchToProps)(Header);
+    set_expression: PropTypes.func.isRequired
+};

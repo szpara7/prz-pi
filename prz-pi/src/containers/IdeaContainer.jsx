@@ -9,7 +9,8 @@ import { fetch_users } from '../actions/userActions.js';
 const mapStateToProps = (state) => {
     return {
         isLoading: state.idea.isLoading,
-        ideas: state.idea.ideas
+        ideas: state.idea.ideas,
+        searchExpression: state.search.expression
     };
 }
 
