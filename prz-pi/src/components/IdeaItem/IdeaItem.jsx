@@ -6,13 +6,15 @@ import PropTypes from 'prop-types';
 import './IdeaItem.css';
 import RatingBox from '../RatingBox/RatingBox.jsx';
 import { updateIdea, deleteIdea, update_idea_box_show, moveToTodo } from '../../actions/ideaActions.js';
+import { fetch_users } from '../../actions/userActions.js';
 
 class IdeaItem extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            isMoveToTodoBoxOpen: false
+            isMoveToTodoBoxOpen: false,
+            userValue : ''
         };
 
         this.addLike = this.addLike.bind(this);
@@ -21,6 +23,12 @@ class IdeaItem extends Component {
         this.update_idea_box_show = this.update_idea_box_show.bind(this);
         this.moveToTodo = this.moveToTodo.bind(this);
         this.toggleForm = this.toggleForm.bind(this);
+        this.fetchUsers = this.fetchUsers.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    fetchUsers(e) {
+        this.props.fetchUsers();
     }
 
     addLike() {
@@ -46,7 +54,11 @@ class IdeaItem extends Component {
     }
 
     moveToTodo() {
-        this.props.moveToTodo(this.props.idea);
+        let idea = Object.assign({}, this.props.idea);
+
+        idea.userId = this.state.userValue;
+
+        this.props.moveToTodo(idea);
     }
 
     toggleForm() {
@@ -55,12 +67,26 @@ class IdeaItem extends Component {
         }));
     }
 
+    handleChange(e) {
+        this.setState({
+            userValue: e.target.value
+        });
+    }
+
     render() {
 
         const showBox = this.state.isMoveToTodoBoxOpen;
 
+        const UserSelect =
+            <select className="form-control" value={this.state.userValue} onChange={this.handleChange} required={true}>
+                <option value=''></option>
+                {this.props.users.map((user) =>
+                    <option value={user.id} key={user.id}>{user.fullName}</option>
+                )}
+            </select>
+
         return (
-            <div className="col-sm-12 col-md-6 mt-4">
+            <div className="col-sm-12 col-md-6 mt-4" >
                 <div className="item p-2">
                     <div className="clearfix">
                         <h4 className="float-left">{this.props.idea.title}</h4>
@@ -83,17 +109,11 @@ class IdeaItem extends Component {
                         {
                             showBox &&
                             <div className="todo-form p-2">
-                                <form onSubmit={this.handleSubmit}>
+                                <form onSubmit={this.moveToTodo}>
                                     <h2>MOVE TO TODO</h2>
                                     <div className="form-group">
                                         <h4 htmlFor="title">Assign to</h4>
-                                        <select class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
+                                        {UserSelect}
                                     </div>
                                     <div className="btn-group-lg">
                                         <button type="button" className="btn btn-warning rounded-0 col-6" onClick={this.toggleForm}><i className="fas fa-long-arrow-alt-left"></i> Back</button>
@@ -114,22 +134,36 @@ IdeaItem.propTypes = {
     deleteIdea: PropTypes.func.isRequired,
     update_idea_box_show: PropTypes.func.isRequired,
     moveToTodo: PropTypes.func.isRequired,
+    fetchUsers: PropTypes.func.isRequired,
     idea: PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
         likes: PropTypes.number.isRequired,
         dislikes: PropTypes.number.isRequired
-    })
+    }),
+    users: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
+        fullName: PropTypes.string.isRequired
+    }))
 };
+
+const mapStateToProps = (state) => {
+    return {
+        users: state.user.users
+    };
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
         updateIdea: (oldIdea, newIdea) => dispatch(updateIdea(oldIdea, newIdea)),
         deleteIdea: (id) => dispatch(deleteIdea(id)),
         update_idea_box_show: (idea) => dispatch(update_idea_box_show(idea)),
-        moveToTodo: (idea) => dispatch(moveToTodo(idea))
+        moveToTodo: (idea) => dispatch(moveToTodo(idea)),
+        fetchUsers: () => dispatch(fetch_users())
     };
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(IdeaItem));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(IdeaItem));

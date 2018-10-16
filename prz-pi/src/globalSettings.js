@@ -1,1 +1,1 @@
-export const API_URL = "https://agileboardapi.azurewebsites.net/api";
+export const API_URL = "http://localhost/agile/api";

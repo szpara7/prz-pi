@@ -14,6 +14,7 @@ class IdeaContent extends Component {
 
     componentDidMount() {
         this.props.fetchIdeaList();
+        this.props.fetchUsers();
     }
 
     render() {
@@ -41,7 +42,9 @@ class IdeaContent extends Component {
 
 IdeaContent.propTypes = {
     isLoading: PropTypes.bool.isRequired,
-    ideas: PropTypes.array
+    ideas: PropTypes.array,
+    fetchIdeaList: PropTypes.func.isRequired,
+    fetchUsers: PropTypes.func.isRequired
 };
 
 export default IdeaContent;

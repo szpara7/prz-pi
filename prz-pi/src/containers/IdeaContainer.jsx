@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import IdeaContent from '../components/IdeaContent/IdeaContent.jsx';
 import { fetchIdeaList } from '../actions/ideaActions.js';
+import { fetch_users } from '../actions/userActions.js';
 
 const mapStateToProps = (state) => {
     return {
@@ -14,7 +15,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchIdeaList: () => dispatch(fetchIdeaList())
+        fetchIdeaList: () => dispatch(fetchIdeaList()),
+        fetchUsers: () => dispatch(fetch_users())
     };
 }
 

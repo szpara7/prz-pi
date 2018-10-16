@@ -6,6 +6,7 @@ import todoReducer from './reducers/todoReducer';
 import inProgressReducer from './reducers/inProgressReducer';
 import doneReducer from './reducers/doneReducer';
 import notificationReducer from './reducers/notificationsReducer';
+import userReducer from './reducers/userReducer';
 
 
 export default createStore(combineReducers({
@@ -13,6 +14,7 @@ export default createStore(combineReducers({
 	todo: todoReducer,
 	inProgess: inProgressReducer,
 	done: doneReducer,
-	notification: notificationReducer
+	notification: notificationReducer,
+	user: userReducer
 }),
 {}, applyMiddleware(thunk));
