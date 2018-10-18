@@ -1,11 +1,12 @@
 import { IDEA_CONSTS } from '../actions/ideaActions.js';
 
-const initialState = { 
+const initialState = {
     ideas: [],
     isLoading: false,
     isCreateIdeaBoxOpen: false,
     isUpdateIdeaBoxOpen: false,
-    ideaToUpdate : {}
+    isMoveToTodoBoxOpen: false,
+    ideaToUpdate: {}
 };
 
 const ideaReducer = (state = initialState, action) => {
@@ -83,8 +84,8 @@ const ideaReducer = (state = initialState, action) => {
                     return a.id - b.id;
                 })
             };
-        
-        case IDEA_CONSTS.DELETE_IDEA_FAILURE: 
+
+        case IDEA_CONSTS.DELETE_IDEA_FAILURE:
             return state = {
                 ...state
             };
@@ -96,32 +97,45 @@ const ideaReducer = (state = initialState, action) => {
                 isCreateIdeaBoxOpen: false,
                 ideaToUpdate: action.idea
             };
-        
+
         case IDEA_CONSTS.UPDATE_IDEA_BOX_HIDE:
             return state = {
                 ...state,
                 isUpdateIdeaBoxOpen: false
             };
 
-        case IDEA_CONSTS.MOVE_TO_TODO_REQUEST:     
+        case IDEA_CONSTS.MOVE_TO_TODO_REQUEST:
             return state = {
                 ...state,
                 ideas: [...state.ideas.filter(t => t.id !== action.id)].sort((a, b) => {
                     return a.id - b.id;
-                })
+                }),
             };
 
-        case IDEA_CONSTS.MOVE_TO_TODO_SUCCESS: 
+        case IDEA_CONSTS.MOVE_TO_TODO_SUCCESS:
             return state = {
-                ...state
+                ...state,
+                isMoveToTodoBoxOpen: false
             };
 
         case IDEA_CONSTS.MOVE_TO_TODO_FAILURE:
             return state = {
                 ...state,
-                ideas: [...state.ideas, action.idea].sort((a,b) => {
+                ideas: [...state.ideas, action.idea].sort((a, b) => {
                     return a.id - b.id
                 })
+            };
+
+        case IDEA_CONSTS.MOVE_TO_TODO_BOX_SHOW:
+            return state = {
+                ...state,
+                isMoveToTodoBoxOpen: true
+            };
+
+        case IDEA_CONSTS.MOVE_TO_TODO_BOX_HIDE:
+            return state = {
+                ...state,
+                isMoveToTodoBoxOpen: false
             };
 
         default: return state;

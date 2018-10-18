@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import './IdeaItem.css';
 import RatingBox from '../RatingBox/RatingBox.jsx';
-import { updateIdea, deleteIdea, update_idea_box_show, moveToTodo } from '../../actions/ideaActions.js';
+import { updateIdea, deleteIdea, update_idea_box_show, moveToTodo, move_to_todo_box_show, move_to_todo_box_hide } from '../../actions/ideaActions.js';
 import { fetch_users } from '../../actions/userActions.js';
 
 class IdeaItem extends Component {
@@ -13,8 +13,7 @@ class IdeaItem extends Component {
         super(props);
 
         this.state = {
-            isMoveToTodoBoxOpen: false,
-            userValue : ''
+            userValue: ''
         };
 
         this.addLike = this.addLike.bind(this);
@@ -53,18 +52,23 @@ class IdeaItem extends Component {
         this.props.update_idea_box_show(this.props.idea);
     }
 
-    moveToTodo() {
+    moveToTodo(e) {
+        e.preventDefault();
+
         let idea = Object.assign({}, this.props.idea);
 
         idea.userId = this.state.userValue;
 
         this.props.moveToTodo(idea);
     }
-
+    
     toggleForm() {
-        this.setState(prevState => ({
-            isMoveToTodoBoxOpen: !prevState.isMoveToTodoBoxOpen
-        }));
+        if(this.props.isMoveToTodoBoxOpen) {
+            this.props.move_to_todo_box_hide();
+        }
+        else {
+            this.props.move_to_todo_box_show();
+        }
     }
 
     handleChange(e) {
@@ -75,7 +79,7 @@ class IdeaItem extends Component {
 
     render() {
 
-        const showBox = this.state.isMoveToTodoBoxOpen;
+        const showBox = this.props.isMoveToTodoBoxOpen;
 
         const UserSelect =
             <select className="form-control" value={this.state.userValue} onChange={this.handleChange} required={true}>
@@ -108,7 +112,7 @@ class IdeaItem extends Component {
                         <RatingBox onLikeClick={this.addLike} onDislikeClick={this.addDislike} likes={this.props.idea.likes} unlikes={this.props.idea.dislikes} />
                         {
                             showBox &&
-                            <div className="todo-form p-2">
+                            <div className="todo-form p-2 bg-primary">
                                 <form onSubmit={this.moveToTodo}>
                                     <h2>MOVE TO TODO</h2>
                                     <div className="form-group">
@@ -135,6 +139,8 @@ IdeaItem.propTypes = {
     update_idea_box_show: PropTypes.func.isRequired,
     moveToTodo: PropTypes.func.isRequired,
     fetchUsers: PropTypes.func.isRequired,
+    move_to_todo_box_hide: PropTypes.func.isRequired,
+    move_to_todo_box_show: PropTypes.func.isRequired,
     idea: PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
@@ -147,12 +153,14 @@ IdeaItem.propTypes = {
         firstName: PropTypes.string,
         lastName: PropTypes.string,
         fullName: PropTypes.string.isRequired
-    }))
+    })),
+    isMoveToTodoBoxOpen: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => {
     return {
-        users: state.user.users
+        users: state.user.users,
+        isMoveToTodoBoxOpen: state.idea.isMoveToTodoBoxOpen
     };
 }
 
@@ -162,7 +170,9 @@ const mapDispatchToProps = (dispatch) => {
         deleteIdea: (id) => dispatch(deleteIdea(id)),
         update_idea_box_show: (idea) => dispatch(update_idea_box_show(idea)),
         moveToTodo: (idea) => dispatch(moveToTodo(idea)),
-        fetchUsers: () => dispatch(fetch_users())
+        fetchUsers: () => dispatch(fetch_users()),
+        move_to_todo_box_show: () => dispatch(move_to_todo_box_show()),
+        move_to_todo_box_hide: () => dispatch(move_to_todo_box_hide())
     };
 }
 

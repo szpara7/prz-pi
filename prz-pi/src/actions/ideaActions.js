@@ -21,7 +21,9 @@ export const IDEA_CONSTS = {
     DELETE_IDEA_FAILURE: 'DELETE_IDEA_FAILURE',
     MOVE_TO_TODO_REQUEST: 'MOVE_TO_TODO_REQUEST',
     MOVE_TO_TODO_SUCCESS: 'MOVE_TO_TODO_REQUEST',
-    MOVE_TO_TODO_FAILURE: 'MOVE_TO_TODO_FAILURE'
+    MOVE_TO_TODO_FAILURE: 'MOVE_TO_TODO_FAILURE',
+    MOVE_TO_TODO_BOX_SHOW: 'MOVE_TO_TODO_BOX_SHOW',
+    MOVE_TO_TODO_BOX_HIDE: 'MOVE_TO_TODO_BOX_HIDE'
 };
 
 
@@ -98,6 +100,7 @@ export const moveToTodo = (idea) => {
         .then(s => {
             dispatch(move_to_todo_success());
             dispatch(NOTIFICATION_ACTIONS.notification_success(responseMessages.MOVE_TO_TODO_SUCCESS));
+            dispatch(move_to_todo_box_hide());
         })
         .catch(e => {     
             ideaAssign.modelStatus = 1;
@@ -128,6 +131,9 @@ export function create_idea_box_hide() { return { type: IDEA_CONSTS.CREATE_IDEA_
 
 export function update_idea_box_show(idea) { return { type: IDEA_CONSTS.UPDATE_IDEA_BOX_SHOW, idea:idea }; }
 export function update_idea_box_hide() { return { type: IDEA_CONSTS.UPDATE_IDEA_BOX_HIDE }; }
+
+export function move_to_todo_box_show() { return { type: IDEA_CONSTS.MOVE_TO_TODO_BOX_SHOW }; }
+export function move_to_todo_box_hide() { return { type: IDEA_CONSTS.MOVE_TO_TODO_BOX_HIDE }; }
 
 function move_to_todo_request(id) { return { type: IDEA_CONSTS.MOVE_TO_TODO_REQUEST, id: id }; }
 function move_to_todo_success() { return { type: IDEA_CONSTS.MOVE_TO_TODO_SUCCESS }; }
