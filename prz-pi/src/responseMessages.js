@@ -9,5 +9,14 @@ export default {
     DELETE_IDEA_FAILURE: "Wystąpił błąd podczas próby usunięcia idei",
     MOVE_TO_TODO_SUCCESS: "Idea została przeniesiona do Todo",
     MOVE_TO_TODO_FAILURE: "Wystąpił błąd podczas przenoszenia Idei do Todo",
-    FETCH_USERS_FAILURE: "Wystąpił błąd podczas pobierania listy użytkowników"
+    FETCH_USERS_FAILURE: "Wystąpił błąd podczas pobierania listy użytkowników",
+
+    UPDATE_TODO_SUCCESS: "Todo został edytowany",
+    UPDATE_TODO_FAILURE: "Wystąpił błąd podczas edycji Todo",
+    CREATE_TODO_SUCCESS: "Todo zostało dodane",
+    CREATE_TODO_FAILUER: "Wystąpił błąd podczas dodawania Todo",
+    DELETE_TODO_SUCCESS: "Todo został usunięty",
+    DELETE_TODO_FAILURE: "Wystąpił błąd podczas próby usunięcia Todo",
+    MOVE_TO_INPROGRESS_SUCCESS: "Todo została przeniesiona do In Progress",
+    MOVE_TO_INPROGRESS_FAILURE: "Wystąpił błąd podczas przenoszenia Todo do In Progress",
 };
