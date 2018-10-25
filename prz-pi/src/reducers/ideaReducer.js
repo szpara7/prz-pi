@@ -6,7 +6,8 @@ const initialState = {
     isCreateIdeaBoxOpen: false,
     isUpdateIdeaBoxOpen: false,
     isMoveToTodoBoxOpen: false,
-    ideaToUpdate: {}
+    ideaToUpdate: {},
+    focusedIdeaId: 0
 };
 
 const ideaReducer = (state = initialState, action) => {
@@ -129,7 +130,8 @@ const ideaReducer = (state = initialState, action) => {
         case IDEA_CONSTS.MOVE_TO_TODO_BOX_SHOW:
             return state = {
                 ...state,
-                isMoveToTodoBoxOpen: true
+                isMoveToTodoBoxOpen: true,
+                focusedIdeaId: action.id
             };
 
         case IDEA_CONSTS.MOVE_TO_TODO_BOX_HIDE:

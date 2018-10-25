@@ -132,7 +132,7 @@ export function create_idea_box_hide() { return { type: IDEA_CONSTS.CREATE_IDEA_
 export function update_idea_box_show(idea) { return { type: IDEA_CONSTS.UPDATE_IDEA_BOX_SHOW, idea:idea }; }
 export function update_idea_box_hide() { return { type: IDEA_CONSTS.UPDATE_IDEA_BOX_HIDE }; }
 
-export function move_to_todo_box_show() { return { type: IDEA_CONSTS.MOVE_TO_TODO_BOX_SHOW }; }
+export function move_to_todo_box_show(id) { return { type: IDEA_CONSTS.MOVE_TO_TODO_BOX_SHOW, id: id}; }
 export function move_to_todo_box_hide() { return { type: IDEA_CONSTS.MOVE_TO_TODO_BOX_HIDE }; }
 
 function move_to_todo_request(id) { return { type: IDEA_CONSTS.MOVE_TO_TODO_REQUEST, id: id }; }

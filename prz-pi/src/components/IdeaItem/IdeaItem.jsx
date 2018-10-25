@@ -67,7 +67,7 @@ class IdeaItem extends Component {
             this.props.move_to_todo_box_hide();
         }
         else {
-            this.props.move_to_todo_box_show();
+            this.props.move_to_todo_box_show(this.props.idea.id);
         }
     }
 
@@ -79,7 +79,7 @@ class IdeaItem extends Component {
 
     render() {
 
-        const showBox = this.props.isMoveToTodoBoxOpen;
+        const showBox = this.props.isMoveToTodoBoxOpen && this.props.focusedIdeaId === this.props.idea.id;
 
         const UserSelect =
             <select className="form-control" value={this.state.userValue} onChange={this.handleChange} required={true}>
@@ -154,13 +154,15 @@ IdeaItem.propTypes = {
         lastName: PropTypes.string,
         fullName: PropTypes.string.isRequired
     })),
-    isMoveToTodoBoxOpen: PropTypes.bool.isRequired
+    isMoveToTodoBoxOpen: PropTypes.bool.isRequired,
+    focusedIdeaId: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => {
     return {
         users: state.user.users,
-        isMoveToTodoBoxOpen: state.idea.isMoveToTodoBoxOpen
+        isMoveToTodoBoxOpen: state.idea.isMoveToTodoBoxOpen,
+        focusedIdeaId: state.idea.focusedIdeaId
     };
 }
 
@@ -171,7 +173,7 @@ const mapDispatchToProps = (dispatch) => {
         update_idea_box_show: (idea) => dispatch(update_idea_box_show(idea)),
         moveToTodo: (idea) => dispatch(moveToTodo(idea)),
         fetchUsers: () => dispatch(fetch_users()),
-        move_to_todo_box_show: () => dispatch(move_to_todo_box_show()),
+        move_to_todo_box_show: (id) => dispatch(move_to_todo_box_show(id)),
         move_to_todo_box_hide: () => dispatch(move_to_todo_box_hide())
     };
 }
