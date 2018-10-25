@@ -14,6 +14,7 @@ class TodoContent extends Component {
 
     componentDidMount() {
         this.props.fetchTodosList();
+        this.props.fetchUsers();
     }
 
     render() {
@@ -28,7 +29,7 @@ class TodoContent extends Component {
                         <div className="container">
                             <div className="row container-border justify-content-between">
                                 {this.props.todos.filter(t => t.title.includes(this.props.searchExpression)).map((item, key) =>
-                                    <TodoItem todo={item} key={key} />
+                                    <TodoItem todo={item} key={key} user={this.props.users.find(t => t.id === item.userId)} />
                                 )}
                             </div>
                         </div>
@@ -42,7 +43,8 @@ class TodoContent extends Component {
 TodoContent.propTypes = {
     isLoading: PropTypes.bool.isRequired,
     todos: PropTypes.array,
-    fetchTodosList: PropTypes.func.isRequired
+    fetchTodosList: PropTypes.func.isRequired,
+    fetchUsers: PropTypes.func.isRequired
 };
 
 export default TodoContent;

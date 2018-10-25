@@ -60,8 +60,13 @@ class TodoItem extends Component {
                             {this.props.todo.description}
                         </p>
                     </div>
-                    <div className="d-flex justify-content-end">
-                        <RatingBox onLikeClick={this.addLike} onDislikeClick={this.addDislike} likes={this.props.todo.likes} unlikes={this.props.todo.dislikes} />
+                    <div>
+                        <div>
+                            {/* {this.props.user.fullName} */}
+                        </div>
+                        <div className="d-flex justify-content-end">
+                            <RatingBox onLikeClick={this.addLike} onDislikeClick={this.addDislike} likes={this.props.todo.likes} unlikes={this.props.todo.dislikes} />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -82,9 +87,9 @@ TodoItem.propTypes = {
     })
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
     return {
- 
+
     };
 }
 
@@ -92,7 +97,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         updateTodo: (oldTodo, newTodo) => dispatch(updateTodo(oldTodo, newTodo)),
         deleteTodo: (id) => dispatch(deleteTodo(id)),
-        update_todo_box_show: (todo) => dispatch(update_todo_box_show(todo))      
+        update_todo_box_show: (todo) => dispatch(update_todo_box_show(todo))
     };
 }
 

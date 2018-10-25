@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import './TodoCreate.css';
+import UsersDropDownListContainer from '../../containers/UsersDropDownListContainer';
 
 class TodoCreate extends Component {
     constructor(props) {
@@ -9,7 +10,8 @@ class TodoCreate extends Component {
 
         this.state = {
             title: '',
-            description: ''
+            description: '',
+            userId: null
         };
 
         this.toggleForm = this.toggleForm.bind(this);
@@ -23,7 +25,8 @@ class TodoCreate extends Component {
 
             this.setState({
                 title: '',
-                description: ''
+                description: '',
+                userId: null
             });           
         }
         else {
@@ -32,7 +35,8 @@ class TodoCreate extends Component {
 
             this.setState({
                 title: '',
-                description: ''
+                description: '',
+                userId: null
             });
         } 
     }
@@ -52,6 +56,7 @@ class TodoCreate extends Component {
             modelStatus: 2,
             likes: 0,
             dislikes: 0,
+            userId: this.state.userId
         };     
 
         this.props.createTodo(todo);
@@ -86,6 +91,10 @@ class TodoCreate extends Component {
                             <div className="form-group">
                                 <h4 htmlFor="description">Description</h4>
                                 <input type="text" name="description" className="form-control" onChange={this.handleInput} value={this.state.description} required />
+                            </div>
+                            <div className="form-group">
+                                <h4 htmlFor={this.state.userId}>Assign user</h4>
+                                <UsersDropDownListContainer onChange={this.handleInput} userId={this.state.userId} />
                             </div>
                             <div className="btn-group-lg">
                                 <button type="button" className="btn btn-warning rounded-0 col-6" onClick={this.toggleForm}><i className="fas fa-long-arrow-alt-left"></i> Back</button>

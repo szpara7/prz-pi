@@ -88,6 +88,19 @@ const todoReducer = (state = initialState, action) => {
                 ...state
             };
 
+        case TODO_CONSTS.DELETE_TODO_SUCCESS:
+            return state = {
+                ...state,
+                todos: [...state.todos.filter(t => t.id !== action.id)].sort((a, b) => {
+                    a.id - b.id
+                })
+            };
+
+        case TODO_CONSTS.DELETE_TODO_FAILURE:
+            return state = {
+                ...state
+            };
+
 
         default: return state;
     }

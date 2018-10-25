@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import './TodoUpdate.css';
+import UsersDropDownListContainer from '../../containers/UsersDropDownListContainer';
 
 class TodoUpdate extends Component {
     constructor(props) {
@@ -9,6 +11,7 @@ class TodoUpdate extends Component {
         this.state = {
             title: '',
             description: '',
+            userId: '',
             isSubmited: false
         };
 
@@ -23,7 +26,8 @@ class TodoUpdate extends Component {
 
         this.setState({
             title: '',
-            description: ''
+            description: '',
+            userId: ''
         });
     }
 
@@ -42,28 +46,34 @@ class TodoUpdate extends Component {
             description: this.state.description,
             modelStatus: 2,
             likes: this.props.todo.likes,
-            dislikes: this.props.todo.dislikes
+            dislikes: this.props.todo.dislikes,
+            userId: this.state.userId
         };
 
         this.setState({
             isSubmited: true
         });
+        
 
         this.props.updateTodo(this.props.todo, newTodo);
     }
 
     static getDerivedStateFromProps(props, state) {        
-        if (props.isUpdateTodoBoxOpen && !state.isSubmited && (state.title === '' && state.description === '')) {
+        if (props.isUpdateTodoBoxOpen && !state.isSubmited && 
+            (state.title === '' && state.description === '')) {
             return {
                 title: props.todo.title,
-                description: props.todo.description
+                description: props.todo.description,
+                userId: props.todo.userId
             };
         }
         else if(state.isSubmited) {
+
             return { 
                 isSubmited: false,
                 title: '',
-                description: ''
+                description: '',
+                userId: null
             };
         }
         return null;
@@ -78,12 +88,16 @@ class TodoUpdate extends Component {
                         <form onSubmit={this.handleSubmit}>
                             <h2>UPDATE TODO</h2>
                             <div className="form-group">
-                                <h4 htmlFor="title">Title</h4>
+                                <h4 htmlFor={this.state.title}>Title</h4>
                                 <input type="text" name="title" className="form-control" onChange={this.handleInput} value={this.state.title} required />
                             </div>
                             <div className="form-group">
-                                <h4 htmlFor="description">Description</h4>
+                                <h4 htmlFor={this.state.description}>Description</h4>
                                 <input type="text" name="description" className="form-control" onChange={this.handleInput} value={this.state.description} required />
+                            </div>
+                            <div className="form-group">
+                                <h4 htmlFor={this.props.userValue}>Assign to user</h4>
+                                <UsersDropDownListContainer userId={this.state.userId} onChange={this.handleInput}/>
                             </div>
                             <div className="btn-group-lg">
                                 <button type="button" className="btn btn-warning rounded-0 col-6" onClick={this.closeForm}><i className="fas fa-long-arrow-alt-left"></i> Back</button>
