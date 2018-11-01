@@ -29,7 +29,7 @@ class TodoContent extends Component {
                         <div className="container">
                             <div className="row container-border justify-content-between">
                                 {this.props.todos.filter(t => t.title.includes(this.props.searchExpression)).map((item, key) =>
-                                    <TodoItem todo={item} key={key} user={this.props.users.find(t => t.id === item.userId)} />
+                                    <TodoItem todo={item} key={key} />
                                 )}
                             </div>
                         </div>

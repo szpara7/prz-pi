@@ -44,7 +44,7 @@ class TodoItem extends Component {
         this.props.moveTo(this.props.todo, 1); //status dla idea
     }
 
-    render() {
+    render() {   
 
         return (
             <div className="col-sm-12 col-md-6 mt-4" >
@@ -68,7 +68,7 @@ class TodoItem extends Component {
                     </div>
                     <div>
                         <div>
-                            {/* {this.props.user.fullName} */}
+                            {this.props.users.find(t => t.id == this.props.todo.userId).fullName}
                         </div>
                         <div className="d-flex justify-content-end">
                             <RatingBox onLikeClick={this.addLike} onDislikeClick={this.addDislike} likes={this.props.todo.likes} unlikes={this.props.todo.dislikes} />
@@ -91,12 +91,18 @@ TodoItem.propTypes = {
         description: PropTypes.string.isRequired,
         likes: PropTypes.number.isRequired,
         dislikes: PropTypes.number.isRequired
-    })
+    }),
+    users: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
+        fullName: PropTypes.string
+    }))
 };
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state)=> {
     return {
-
+        users: state.user.users
     };
 }
 
