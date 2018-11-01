@@ -100,7 +100,27 @@ const todoReducer = (state = initialState, action) => {
             return state = {
                 ...state
             };
+        
+        case TODO_CONSTS.MOVE_TO_REQUEST:
+            return state = {
+                ...state,
+                todos: [...state.todos.filter(t => t.id !== action.id)].sort((a, b) => {
+                    a.id - b.id
+                })
+            };
 
+        case TODO_CONSTS.MOVE_TO_SUCCESS:
+            return state = {
+                ...state
+            };
+
+        case TODO_CONSTS.MOVE_TO_FAILURE:
+            return state = {
+                ...state,
+                todos: [...state.todos, action.todo].sort((a, b) => {
+                    a.id - b.id
+                })
+            }
 
         default: return state;
     }

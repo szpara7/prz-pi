@@ -19,9 +19,9 @@ export const TODO_CONSTS = {
     UPDATE_TODO_FAILURE: 'UPDATE_TODO_FAILURE',
     DELETE_TODO_SUCCESS: 'DELETE_TODO_SUCCESS',
     DELETE_TODO_FAILURE: 'DELETE_TODO_FAILURE',
-    MOVE_TO_INPROGRESS_REQUEST: 'MOVE_TO_INPROGRESS_REQUEST',
-    MOVE_TO_INPROGRESS_SUCCESS: 'MOVE_TO_INPROGRESS_REQUEST',
-    MOVE_TO_INPROGRESS_FAILURE: 'MOVE_TO_INPROGRESS_FAILURE',
+    MOVE_TO_REQUEST: 'MOVE_TO_REQUEST',
+    MOVE_TO_SUCCESS: 'MOVE_TO_REQUEST',
+    MOVE_TO_FAILURE: 'MOVE_TO_FAILURE',
     MOVE_TO_INPROGRESS_BOX_SHOW: 'MOVE_TO_INPROGRESS_BOX_SHOW',
     MOVE_TO_INPROGRESS_BOX_HIDE: 'MOVE_TO_INPROGRESS_BOX_HIDE'
 };
@@ -37,7 +37,7 @@ export const fetchTodoList = () => {
             })
             .catch(e => {
                 dispatch(fetch_todo_failure(e));
-                dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.FETCH_IDEA_FAILURE));
+                dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.FETCH_TODO_FAILURE));
             })
     }
 }
@@ -48,12 +48,12 @@ export const createTodo = (todo) => {
         axios.post(`${API_URL}/models`, todo)
             .then(s => {
                 dispatch(create_todo_succes(s.data));
-                dispatch(NOTIFICATION_ACTIONS.notification_success(responseMessages.CREATE_IDEA_SUCCESS));
+                dispatch(NOTIFICATION_ACTIONS.notification_success(responseMessages.CREATE_TODO_SUCCESS));
                 dispatch(create_todo_box_hide());
             })
             .catch(e => {
                 dispatch(create_todo_failure(e));
-                dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.CREATE_IDEA_FAILUER));
+                dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.CREATE_TODO_FAILUER));
             })
     }
 }
@@ -67,12 +67,12 @@ export const updateTodo = (oldTodo, newTodo) => {
         axios.put(`${API_URL}/models/${copyNewTodo.id}`, copyNewTodo)
             .then(s => {
                  dispatch(update_todo_success(s.data));
-                 dispatch(NOTIFICATION_ACTIONS.notification_success(responseMessages.UPDATE_IDEA_SUCCESS));
+                 dispatch(NOTIFICATION_ACTIONS.notification_success(responseMessages.UPDATE_TODO_SUCCESS));
                  dispatch(update_todo_box_hide());
             })
             .catch(err => {
                 dispatch(update_todo_failure(err, copyOldTodo));
-                dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.UPDATE_IDEA_FAILURE));
+                dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.UPDATE_TODO_FAILURE));
             })
     }
 }
@@ -82,29 +82,29 @@ export const deleteTodo = (id) => {
         axios.delete(`${API_URL}/models/${id}`)
         .then(s => {
             dispatch(delete_todo_success(id));
-            dispatch(NOTIFICATION_ACTIONS.notification_success(responseMessages.DELETE_IDEA_SUCCESS));
+            dispatch(NOTIFICATION_ACTIONS.notification_success(responseMessages.DELETE_TODO_SUCCESS));
         })
         .catch(e => {
             dispatch(delete_todo_failure());
-            dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.DELETE_IDEA_FAILURE))
+            dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.DELETE_TODO_FAILURE))
         })
     };
 }
 
-export const moveToInProgress = (todo) => {
+export const moveTo = (todo, modelStatus) => {
     let todoAssign = Object.assign({}, todo);
     return (dispatch) => {
-        dispatch(move_to_inprogress_request(todo.id));
-        todoAssign.modelStatus = 3; // status dla inprogress
+        dispatch(move_to_request(todo.id));
+        todoAssign.modelStatus = modelStatus;
         axios.put(`${API_URL}/models/${todoAssign.id}`, todoAssign)
         .then(s => {
-            dispatch(move_to_inprogress_success());
+            dispatch(move_to_success());
             dispatch(NOTIFICATION_ACTIONS.notification_success(responseMessages.MOVE_TO_TODO_SUCCESS));
             dispatch(move_to_inprogress_box_hide());
         })
         .catch(e => {     
             todoAssign.modelStatus = 2;
-            dispatch(move_to_inprogress_failure(todoAssign));
+            dispatch(move_to_failure(todoAssign));
             dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.MOVE_TO_TODO_FAILURE));
         });
     };
@@ -135,6 +135,6 @@ export function update_todo_box_hide() { return { type: TODO_CONSTS.UPDATE_TODO_
 export function move_to_inprogress_box_show() { return { type: TODO_CONSTS.MOVE_TO_INPROGRESS_BOX_SHOW }; }
 export function move_to_inprogress_box_hide() { return { type: TODO_CONSTS.MOVE_TO_INPROGRESS_BOX_HIDE }; }
 
-function move_to_inprogress_request(id) { return { type: TODO_CONSTS.MOVE_TO_INPROGRESS_REQUEST, id: id }; }
-function move_to_inprogress_success() { return { type: TODO_CONSTS.MOVE_TO_INPROGRESS_SUCCESS }; }
-function move_to_inprogress_failure(oldTodo) { return { type: TODO_CONSTS.MOVE_TO_INPROGRESS_FAILURE, todo: oldTodo }; }
+function move_to_request(id) { return { type: TODO_CONSTS.MOVE_TO_REQUEST, id: id }; }
+function move_to_success() { return { type: TODO_CONSTS.MOVE_TO_SUCCESS }; }
+function move_to_failure(oldTodo) { return { type: TODO_CONSTS.MOVE_TO_FAILURE, todo: oldTodo }; }

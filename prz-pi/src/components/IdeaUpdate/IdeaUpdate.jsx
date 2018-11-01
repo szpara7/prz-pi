@@ -20,7 +20,8 @@ class IdeaUpdate extends Component {
     closeForm() {
         this.setState({
             title: '',
-            description: ''
+            description: '',
+            isSubmited: false
         });
 
         this.props.update_idea_box_hide();
@@ -44,20 +45,30 @@ class IdeaUpdate extends Component {
             dislikes: this.props.idea.dislikes
         };
 
+        this.setState({
+            isSubmited: true
+        });
+
         this.props.updateIdea(this.props.idea, newIdea);
     }
 
     static getDerivedStateFromProps(props, state) {
 
-        if(state.title !== props.idea.title && state.description !== props.idea.description)
-        {
-            if(props.idea.title !== undefined && props.idea.description !== undefined) {
+       if(props.isUpdateIdeaBoxOpen && !state.isSubmited && 
+            state.title === '' && state.description === '') {
                 return {
                     title: props.idea.title,
-                    description: props.idea.description
+                    description: props.idea.description,
+                    isSubmited: false
                 };
             }
-        }       
+        else if(state.isSubmited) {
+            return {
+                title: '',
+                description: '',
+                isSubmited: false
+            };
+        }
 
         return null;
     }

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import './TodoItem.css';
 import RatingBox from '../RatingBox/RatingBox.jsx';
-import { updateTodo, deleteTodo, update_todo_box_show, moveToInProgress } from '../../actions/todoActions.js';
+import { updateTodo, deleteTodo, update_todo_box_show, moveTo } from '../../actions/todoActions.js';
 
 class TodoItem extends Component {
     constructor(props) {
@@ -15,6 +15,7 @@ class TodoItem extends Component {
         this.addDislike = this.addDislike.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
         this.update_todo_box_show = this.update_todo_box_show.bind(this);
+        this.backToIdea = this.backToIdea.bind(this);
     }
 
     addLike() {
@@ -39,6 +40,10 @@ class TodoItem extends Component {
         this.props.update_todo_box_show(this.props.todo);
     }
 
+    backToIdea() {
+        this.props.moveTo(this.props.todo, 1); //status dla idea
+    }
+
     render() {
 
         return (
@@ -49,6 +54,7 @@ class TodoItem extends Component {
                         <div className="p-2 float-right dot-action dropleft">
                             <i className="fas fa-ellipsis-v fa-2x" data-toggle="dropdown"></i>
                             <ul className="dropdown-menu dropdown-menu border-0 rounded-0">
+                                <li><a className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.backToIdea}>BACK TO IDEA</a></li>
                                 <li><a className="btn btn-outline-dark border-0 w-100 rounded-0">MOVE TO IN PROGRESS</a></li>
                                 <li><a className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.update_todo_box_show}>EDIT</a></li>
                                 <li><a className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.deleteTodo}>DELETE</a></li>
@@ -78,6 +84,7 @@ TodoItem.propTypes = {
     updateTodo: PropTypes.func.isRequired,
     deleteTodo: PropTypes.func.isRequired,
     update_todo_box_show: PropTypes.func.isRequired,
+    moveTo: PropTypes.func.isRequired,
     idea: PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
@@ -97,7 +104,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         updateTodo: (oldTodo, newTodo) => dispatch(updateTodo(oldTodo, newTodo)),
         deleteTodo: (id) => dispatch(deleteTodo(id)),
-        update_todo_box_show: (todo) => dispatch(update_todo_box_show(todo))
+        update_todo_box_show: (todo) => dispatch(update_todo_box_show(todo)),
+        moveTo: (todo, modelStatus) => dispatch(moveTo(todo, modelStatus))
     };
 }
 
