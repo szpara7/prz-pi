@@ -17,6 +17,6 @@ export default {
     CREATE_TODO_FAILUER: "Wystąpił błąd podczas dodawania Todo",
     DELETE_TODO_SUCCESS: "Todo został usunięty",
     DELETE_TODO_FAILURE: "Wystąpił błąd podczas próby usunięcia Todo",
-    MOVE_TO_INPROGRESS_SUCCESS: "Todo została przeniesiona do In Progress",
-    MOVE_TO_INPROGRESS_FAILURE: "Wystąpił błąd podczas przenoszenia Todo do In Progress",
+    MOVE_TO_SUCCESS: "Todo został przeniesiony",
+    MOVE_TO_FAILURE: "Wystąpił błąd podczas przenoszenia Todo",
 };

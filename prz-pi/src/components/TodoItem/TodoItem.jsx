@@ -16,6 +16,7 @@ class TodoItem extends Component {
         this.deleteTodo = this.deleteTodo.bind(this);
         this.update_todo_box_show = this.update_todo_box_show.bind(this);
         this.backToIdea = this.backToIdea.bind(this);
+        this.moveToInProgress = this.moveToInProgress.bind(this);
     }
 
     addLike() {
@@ -44,6 +45,13 @@ class TodoItem extends Component {
         this.props.moveTo(this.props.todo, 1); //status dla idea
     }
 
+    moveToInProgress() {
+        let todo = Object.assign({}, this.props.todo);
+        todo.startDate = new Date();
+
+        this.props.moveTo(todo, 3) //status dla inprogress
+    }
+
     render() {   
 
         return (
@@ -55,7 +63,7 @@ class TodoItem extends Component {
                             <i className="fas fa-ellipsis-v fa-2x" data-toggle="dropdown"></i>
                             <ul className="dropdown-menu dropdown-menu border-0 rounded-0">
                                 <li><a className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.backToIdea}>BACK TO IDEA</a></li>
-                                <li><a className="btn btn-outline-dark border-0 w-100 rounded-0">MOVE TO IN PROGRESS</a></li>
+                                <li><a className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.moveToInProgress}>MOVE TO IN PROGRESS</a></li>
                                 <li><a className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.update_todo_box_show}>EDIT</a></li>
                                 <li><a className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.deleteTodo}>DELETE</a></li>
                             </ul>

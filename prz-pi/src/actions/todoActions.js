@@ -99,13 +99,13 @@ export const moveTo = (todo, modelStatus) => {
         axios.put(`${API_URL}/models/${todoAssign.id}`, todoAssign)
         .then(s => {
             dispatch(move_to_success());
-            dispatch(NOTIFICATION_ACTIONS.notification_success(responseMessages.MOVE_TO_TODO_SUCCESS));
+            dispatch(NOTIFICATION_ACTIONS.notification_success(responseMessages.MOVE_TO_SUCCESS));
             dispatch(move_to_inprogress_box_hide());
         })
         .catch(e => {     
             todoAssign.modelStatus = 2;
             dispatch(move_to_failure(todoAssign));
-            dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.MOVE_TO_TODO_FAILURE));
+            dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.MOVE_TO_FAILURE));
         });
     };
 }
