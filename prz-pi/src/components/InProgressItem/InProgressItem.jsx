@@ -49,7 +49,7 @@ class InProgressItem extends Component {
                                 <li><a className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.backToTodo}>BACK TO TODO</a></li>
                                 <li><a className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.moveToDone}>MOVE TO DONE</a></li>
                                 <li><a className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.update_inProgress_box_show}>EDIT</a></li>
-                                <li><a className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.deleteinProgress}>DELETE</a></li>
+                                <li><a className="btn btn-outline-dark border-0 w-100 rounded-0" onClick={this.deleteInProgress}>DELETE</a></li>
                             </ul>
                         </div>
                     </div>
@@ -60,7 +60,8 @@ class InProgressItem extends Component {
                     </div>
                     <div>
                         <div>
-                            {this.props.users.find(t => t.id == this.props.inProgress.userId).fullName}
+                            <p><b>Assigne to: </b>{this.props.users.find(t => t.id == this.props.inProgress.userId).fullName}</p>
+                            <p><b>Start date: </b>{this.props.inProgress.startDate}</p>
                         </div>
                         <div className="d-flex justify-content-end">
                             <RatingBox likes={this.props.inProgress.likes} unlikes={this.props.inProgress.dislikes} />

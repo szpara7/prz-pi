@@ -76,7 +76,7 @@ class TodoItem extends Component {
                     </div>
                     <div>
                         <div>
-                            {this.props.users.find(t => t.id == this.props.todo.userId).fullName}
+                            {this.props.users.find(t => t.id == this.props.todo.userId).fullName}      
                         </div>
                         <div className="d-flex justify-content-end">
                             <RatingBox onLikeClick={this.addLike} onDislikeClick={this.addDislike} likes={this.props.todo.likes} unlikes={this.props.todo.dislikes} />
