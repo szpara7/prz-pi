@@ -19,4 +19,12 @@ export default {
     DELETE_TODO_FAILURE: "Wystąpił błąd podczas próby usunięcia Todo",
     MOVE_TO_SUCCESS: "Todo został przeniesiony",
     MOVE_TO_FAILURE: "Wystąpił błąd podczas przenoszenia Todo",
+
+    FETCH_INPROGRESS_FAILURE: "Wystąpił błąd podczas pobierania listy In progress",
+    UPDATE_INPROGRESS_SUCCESS: "In progress został edytowany",
+    UPDATE_INPROGRESS_FAILURE: "Wystąpił błąd podczas edycji In progress",
+    DELETE_INPROGRESS_SUCCESS: "In progress został usunięty",
+    DELETE_INPROGRESS_FAILURE: "Wystąpił błąd podczas próby usunięcia In progress",
+    MOVE_TO_SUCCESS: "In progress został przeniesiony",
+    MOVE_TO_FAILURE: "Wystąpił błąd podczas przenoszenia In progress",
 };

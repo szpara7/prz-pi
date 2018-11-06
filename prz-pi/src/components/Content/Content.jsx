@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
 import IdeaContainer from '../../containers/IdeaContainer.jsx';
 import TodoContainer from '../../containers/TodoContainer.jsx';
-import InProgressContent from '../InProgressContent/InProgressContent.jsx';
+import InProgressContainer from '../../containers/InProgressContainer.jsx';
 import DoneContent from '../DoneContent/DoneContent.jsx';
 
 class Content extends Component {
@@ -13,7 +13,7 @@ class Content extends Component {
 				<Redirect from='/' to='/idea' />
 				<Route exact path='/idea' component={IdeaContainer} />
 				<Route path='/todo' component={TodoContainer} />
-				<Route path='/inProgress' component={InProgressContent} />
+				<Route path='/inProgress' component={InProgressContainer} />
 				<Route path='/done' component={DoneContent} />
 			</div>
 		);

@@ -12,7 +12,7 @@ import searchReducer from './reducers/searchReducer';
 export default createStore(combineReducers({
 	idea: ideaReducer,
 	todo: todoReducer,
-	inProgess: inProgressReducer,
+	inProgress: inProgressReducer,
 	done: doneReducer,
 	notification: notificationReducer,
 	user: userReducer,
