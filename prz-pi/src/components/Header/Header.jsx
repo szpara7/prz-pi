@@ -21,7 +21,7 @@ export default class Header extends Component {
         return (
             <div className="header-border shadow-lg">
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <span className="navbar-brand mb-0 h1">AgileBoard</span>
+                    <NavLink to='/idea'><span className="navbar-brand mb-0 h1">AgileBoard</span></NavLink>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

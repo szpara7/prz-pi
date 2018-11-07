@@ -26,7 +26,8 @@ class InProgressContent extends Component {
                         <InProgressUpdateContainer />
                         <div className="container">
                             <div className="row container-border justify-content-between">
-                                {this.props.inProgress.filter(t => t.title.includes(this.props.searchExpression)).map((item, key) =>
+                                {this.props.inProgress.filter(t => t.title.toUpperCase()
+                                    .includes(this.props.searchExpression.toUpperCase())).map((item, key) =>
                                     <InProgressItem inProgress={item} key={key} />
                                 )}
                             </div>

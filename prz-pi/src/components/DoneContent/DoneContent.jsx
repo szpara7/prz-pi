@@ -26,7 +26,8 @@ class DoneContent extends Component {
                         <DoneUpdateContainer />
                         <div className="container">
                             <div className="row container-border justify-content-between">
-                                {this.props.done.filter(t => t.title.includes(this.props.searchExpression)).map((item, key) =>
+                                {this.props.done.filter(t => t.title.toUpperCase()
+                                    .includes(this.props.searchExpression.toUpperCase())).map((item, key) =>
                                     <DoneItem done={item} key={key} />
                                 )}
                             </div>

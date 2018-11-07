@@ -28,7 +28,8 @@ class TodoContent extends Component {
                         <TodoUpdateContainer />
                         <div className="container">
                             <div className="row container-border justify-content-between">
-                                {this.props.todos.filter(t => t.title.includes(this.props.searchExpression)).map((item, key) =>
+                                {this.props.todos.filter(t => t.title.toUpperCase()
+                                    .includes(this.props.searchExpression.toUpperCase())).map((item, key) =>
                                     <TodoItem todo={item} key={key} />
                                 )}
                             </div>
