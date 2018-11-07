@@ -47,7 +47,8 @@ class InProgressUpdate extends Component {
             modelStatus: 3,
             likes: this.props.inProgress.likes,
             dislikes: this.props.inProgress.dislikes,
-            userId: this.state.userId
+            userId: this.state.userId,
+            startDate: this.props.inProgress.startDate
         };
 
         this.setState({

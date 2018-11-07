@@ -47,7 +47,9 @@ class DoneUpdate extends Component {
             modelStatus: 4,
             likes: this.props.done.likes,
             dislikes: this.props.done.dislikes,
-            userId: this.state.userId
+            userId: this.state.userId,
+            startDate: this.props.done.startDate,
+            endDate: this.props.done.endDate
         };
 
         this.setState({
