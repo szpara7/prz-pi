@@ -27,4 +27,12 @@ export default {
     DELETE_INPROGRESS_FAILURE: "Wystąpił błąd podczas próby usunięcia In progress",
     MOVE_TO_SUCCESS: "In progress został przeniesiony",
     MOVE_TO_FAILURE: "Wystąpił błąd podczas przenoszenia In progress",
+
+    FETCH_INPROGRESS_FAILURE: "Wystąpił błąd podczas pobierania listy Done",
+    UPDATE_INPROGRESS_SUCCESS: "Done został edytowany",
+    UPDATE_INPROGRESS_FAILURE: "Wystąpił błąd podczas edycji Done",
+    DELETE_INPROGRESS_SUCCESS: "Done został usunięty",
+    DELETE_INPROGRESS_FAILURE: "Wystąpił błąd podczas próby usunięcia Done",
+    MOVE_TO_SUCCESS: "Done został przeniesiony",
+    MOVE_TO_FAILURE: "Wystąpił błąd podczas przenoszenia Done",
 };

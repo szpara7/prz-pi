@@ -1,0 +1,12 @@
+.item {
+    background-color: lightgray;
+}
+
+.dot-action:hover {
+    color: aquamarine;
+}
+
+.done-form {
+    z-index: 20;
+    position: absolute;
+}

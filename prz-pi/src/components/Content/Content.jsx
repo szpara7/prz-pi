@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 import IdeaContainer from '../../containers/IdeaContainer.jsx';
 import TodoContainer from '../../containers/TodoContainer.jsx';
 import InProgressContainer from '../../containers/InProgressContainer.jsx';
-import DoneContent from '../DoneContent/DoneContent.jsx';
+import DoneContainer from '../../containers/DoneContainer.jsx';
 
 class Content extends Component {
 	render() {
@@ -14,7 +14,7 @@ class Content extends Component {
 				<Route exact path='/idea' component={IdeaContainer} />
 				<Route path='/todo' component={TodoContainer} />
 				<Route path='/inProgress' component={InProgressContainer} />
-				<Route path='/done' component={DoneContent} />
+				<Route path='/done' component={DoneContainer} />
 			</div>
 		);
 	}
