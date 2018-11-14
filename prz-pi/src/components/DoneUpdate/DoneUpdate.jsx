@@ -11,7 +11,6 @@ class DoneUpdate extends Component {
         this.state = {
             title: '',
             description: '',
-            userId: '',
             isSubmited: false
         };
 
@@ -27,7 +26,6 @@ class DoneUpdate extends Component {
         this.setState({
             title: '',
             description: '',
-            userId: ''
         });
     }
 
@@ -47,7 +45,7 @@ class DoneUpdate extends Component {
             modelStatus: 4,
             likes: this.props.done.likes,
             dislikes: this.props.done.dislikes,
-            userId: this.state.userId,
+            userId: this.props.done.userId,
             startDate: this.props.done.startDate,
             endDate: this.props.done.endDate
         };
@@ -64,8 +62,7 @@ class DoneUpdate extends Component {
             (state.title === '' && state.description === '')) {
             return {
                 title: props.done.title,
-                description: props.done.description,
-                userId: props.done.userId
+                description: props.done.description
             };
         }
         else if(state.isSubmited) {
@@ -73,8 +70,7 @@ class DoneUpdate extends Component {
             return { 
                 isSubmited: false,
                 title: '',
-                description: '',
-                userId: null
+                description: ''
             };
         }
         return null;
@@ -95,11 +91,7 @@ class DoneUpdate extends Component {
                             <div className="form-group">
                                 <h4 htmlFor={this.state.description}>Description</h4>
                                 <input type="text" name="description" className="form-control" onChange={this.handleInput} value={this.state.description} required />
-                            </div>
-                            <div className="form-group">
-                                <h4 htmlFor={this.props.userValue}>Assign to user</h4>
-                                <UsersDropDownListContainer userId={this.state.userId} onChange={this.handleInput}/>
-                            </div>
+                            </div>                           
                             <div className="btn-group-lg">
                                 <button type="button" className="btn btn-warning rounded-0 col-6" onClick={this.closeForm}><i className="fas fa-long-arrow-alt-left"></i> Back</button>
                                 <button type="submit" className="btn btn-success rounded-0 col-6"><i className="fas fa-plus"></i> Save</button>
