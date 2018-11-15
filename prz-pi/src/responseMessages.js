@@ -34,5 +34,5 @@ export default {
     DELETE_DONE_SUCCESS: "Done został usunięty",
     DELETE_DONE_FAILURE: "Wystąpił błąd podczas próby usunięcia Done",
     MOVE_TO_SUCCESS: "Done został przeniesiony",
-    MOVE_TO_FAILURE: "Wystąpił błąd podczas przenoszenia Done",
+    MOVE_TO_FAILURE: "Wystąpił błąd podczas przenoszenia Done"
 };

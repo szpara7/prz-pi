@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 
 import '../LoadingModal/LoadingModal.css';
 
-Modal.setAppElement('#root');
+if (process.env.NODE_ENV !== 'test') {
+    Modal.setAppElement('#root');
+}
 
 class LoadingModal extends Component {
     render() {
