@@ -64,7 +64,7 @@ class InProgressItem extends Component {
                             <p><b>Start date: </b>{this.props.inProgress.startDate}</p>
                         </div>
                         <div className="d-flex justify-content-end">
-                            <RatingBox likes={this.props.inProgress.likes} unlikes={this.props.inProgress.dislikes} />
+                            <RatingBox likes={this.props.inProgress.likes} dislikes={this.props.inProgress.dislikes} />
                         </div>
                     </div>
                 </div>

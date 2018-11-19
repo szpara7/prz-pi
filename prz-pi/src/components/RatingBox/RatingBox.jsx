@@ -12,7 +12,7 @@ class RatingBox extends React.Component {
         return (
             <div className="d-inline-block">
                 <button type="button" onClick={this.props.onLikeClick} className="btn btn-success rounded-0"><span><i className="far fa-thumbs-up"></i>Like {this.props.likes}</span></button>
-                <button type="button" onClick={this.props.onDislikeClick} className="btn btn-secondary rounded-0"><span><i className="far fa-thumbs-down"></i>Dislike {this.props.unlikes}</span></button>
+                <button type="button" onClick={this.props.onDislikeClick} className="btn btn-secondary rounded-0"><span><i className="far fa-thumbs-down"></i>Dislike {this.props.dislikes}</span></button>
             </div>
         );
     }
@@ -20,7 +20,9 @@ class RatingBox extends React.Component {
 
 RatingBox.propTypes = {
     onLikeClick: PropTypes.func.isRequired,
-    onDislikeClick: PropTypes.func.isRequired
+    onDislikeClick: PropTypes.func.isRequired,
+    likes: PropTypes.number.isRequired,
+    dislikes: PropTypes.number.isRequired
 };
 
 export default RatingBox;

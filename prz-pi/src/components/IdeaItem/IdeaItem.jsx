@@ -109,7 +109,7 @@ class IdeaItem extends Component {
                         </p>
                     </div>
                     <div className="d-flex justify-content-end">
-                        <RatingBox onLikeClick={this.addLike} onDislikeClick={this.addDislike} likes={this.props.idea.likes} unlikes={this.props.idea.dislikes} />
+                        <RatingBox onLikeClick={this.addLike} onDislikeClick={this.addDislike} likes={this.props.idea.likes} dislikes={this.props.idea.dislikes} />
                         {
                             showBox &&
                             <div className="todo-form p-2 bg-primary">

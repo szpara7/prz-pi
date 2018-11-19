@@ -57,7 +57,7 @@ class DoneItem extends Component {
                             <p><b>End date: </b>{this.props.done.endDate}</p>
                         </div>
                         <div className="d-flex justify-content-end">
-                            <RatingBox likes={this.props.done.likes} unlikes={this.props.done.dislikes} />
+                            <RatingBox likes={this.props.done.likes} dislikes={this.props.done.dislikes} />
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,9 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 class LoadingModal extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <Modal className="modal-transparent" isOpen={this.props.isLoading}>
