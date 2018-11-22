@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import RatingBox from './RatingBox.jsx';
 
-
 describe('<RatingBox />', () => {
     it('sie renderuje', () => {
         var onClick = jasmine.createSpy();
@@ -15,8 +14,8 @@ describe('<RatingBox />', () => {
         var onClick = jasmine.createSpy();
         var ratingBox = mount(<RatingBox onLikeClick={onClick} onDislikeClick={onClick} likes={1} dislikes={2}/>);
 
-        expect(ratingBox.props().likes).not.toEqual(undefined);
-        expect(ratingBox.props().dislikes).not.toBe(undefined);
+        expect(ratingBox.props().likes).toBeDefined();
+        expect(ratingBox.props().dislikes).toBeDefined();
     })
     
     it('wyświetla poprawanie like/dislike', () => {

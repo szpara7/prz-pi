@@ -48,7 +48,9 @@ class NotificationBox extends Component {
 }
 
 NotificationBox.propTypes = {
-    show: PropTypes.bool.isRequired
+    show: PropTypes.bool.isRequired,
+    message: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired
 };
 
 export default NotificationBox;

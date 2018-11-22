@@ -43,7 +43,8 @@ DoneContent.propTypes = {
     isLoading: PropTypes.bool.isRequired,
     done: PropTypes.array,
     fetchDoneList: PropTypes.func.isRequired,
-    fetchUsers: PropTypes.func.isRequired
+    fetchUsers: PropTypes.func.isRequired,
+    searchExpression: PropTypes.string.isRequired
 };
 
 export default DoneContent;
