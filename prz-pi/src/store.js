@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 
 import ideaReducer from './reducers/ideaReducer';
 import todoReducer from './reducers/todoReducer';
@@ -18,4 +19,4 @@ export default createStore(combineReducers({
 	user: userReducer,
 	search: searchReducer
 }),
-{}, applyMiddleware(thunk));
+{}, applyMiddleware(logger, thunk));
