@@ -19,4 +19,4 @@ export default createStore(combineReducers({
 	user: userReducer,
 	search: searchReducer
 }),
-{}, applyMiddleware(logger, thunk));
+{}, applyMiddleware(logger,thunk ));

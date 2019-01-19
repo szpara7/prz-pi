@@ -19,6 +19,25 @@ class DoneUpdate extends Component {
         this.closeForm = this.closeForm.bind(this);
     }
 
+    static getDerivedStateFromProps(props, state) {        
+        if (props.isUpdateDoneBoxOpen && !state.isSubmited && 
+            (state.title === '' && state.description === '')) {
+            return {
+                title: props.done.title,
+                description: props.done.description
+            };
+        }
+        else if(state.isSubmited) {
+
+            return { 
+                isSubmited: false,
+                title: '',
+                description: ''
+            };
+        }
+        return null;
+    }
+
     closeForm(e) {
         e.preventDefault();
         this.props.update_done_box_hide();
@@ -55,25 +74,6 @@ class DoneUpdate extends Component {
         });        
 
         this.props.updateDone(this.props.done, newDone);
-    }
-
-    static getDerivedStateFromProps(props, state) {        
-        if (props.isUpdateDoneBoxOpen && !state.isSubmited && 
-            (state.title === '' && state.description === '')) {
-            return {
-                title: props.done.title,
-                description: props.done.description
-            };
-        }
-        else if(state.isSubmited) {
-
-            return { 
-                isSubmited: false,
-                title: '',
-                description: ''
-            };
-        }
-        return null;
     }
 
     render() {

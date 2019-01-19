@@ -20,6 +20,27 @@ class TodoUpdate extends Component {
         this.closeForm = this.closeForm.bind(this);
     }
 
+    static getDerivedStateFromProps(props, state) {
+        if (props.isUpdateTodoBoxOpen && !state.isSubmited && 
+            (state.title === '' && state.description === '')) {
+            return {
+                title: props.todo.title,
+                description: props.todo.description,
+                userId: props.todo.userId
+            };
+        }
+        else if(state.isSubmited) {
+
+            return { 
+                isSubmited: false,
+                title: '',
+                description: '',
+                userId: null
+            };
+        }
+        return null;
+    }
+
     closeForm(e) {
         e.preventDefault();
         this.props.update_todo_box_hide();
@@ -55,27 +76,6 @@ class TodoUpdate extends Component {
         });        
 
         this.props.updateTodo(this.props.todo, newTodo);
-    }
-
-    static getDerivedStateFromProps(props, state) {        
-        if (props.isUpdateTodoBoxOpen && !state.isSubmited && 
-            (state.title === '' && state.description === '')) {
-            return {
-                title: props.todo.title,
-                description: props.todo.description,
-                userId: props.todo.userId
-            };
-        }
-        else if(state.isSubmited) {
-
-            return { 
-                isSubmited: false,
-                title: '',
-                description: '',
-                userId: null
-            };
-        }
-        return null;
     }
 
     render() {

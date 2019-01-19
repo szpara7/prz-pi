@@ -20,6 +20,27 @@ class InProgressUpdate extends Component {
         this.closeForm = this.closeForm.bind(this);
     }
 
+    static getDerivedStateFromProps(props, state) {        
+        if (props.isUpdateInProgressBoxOpen && !state.isSubmited && 
+            (state.title === '' && state.description === '')) {
+            return {
+                title: props.inProgress.title,
+                description: props.inProgress.description,
+                userId: props.inProgress.userId
+            };
+        }
+        else if(state.isSubmited) {
+
+            return { 
+                isSubmited: false,
+                title: '',
+                description: '',
+                userId: null
+            };
+        }
+        return null;
+    }
+
     closeForm(e) {
         e.preventDefault();
         this.props.update_inProgress_box_hide();
@@ -56,27 +77,6 @@ class InProgressUpdate extends Component {
         });        
 
         this.props.updateInProgress(this.props.inProgress, newInProgress);
-    }
-
-    static getDerivedStateFromProps(props, state) {        
-        if (props.isUpdateInProgressBoxOpen && !state.isSubmited && 
-            (state.title === '' && state.description === '')) {
-            return {
-                title: props.inProgress.title,
-                description: props.inProgress.description,
-                userId: props.inProgress.userId
-            };
-        }
-        else if(state.isSubmited) {
-
-            return { 
-                isSubmited: false,
-                title: '',
-                description: '',
-                userId: null
-            };
-        }
-        return null;
     }
 
     render() {

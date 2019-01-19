@@ -8,6 +8,15 @@ class RatingBox extends React.Component {
         super(props);
     }
 
+    shouldComponentUpdate(nextProps) {
+        if(nextProps.likes != this.props.likes || nextProps.dislikes != this.props.dislikes)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     render() {
         return (
             <div className="d-inline-block">

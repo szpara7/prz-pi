@@ -17,6 +17,27 @@ class IdeaUpdate extends Component {
         this.closeForm = this.closeForm.bind(this);
     }
 
+    static getDerivedStateFromProps(props, state) {
+
+        if(props.isUpdateIdeaBoxOpen && !state.isSubmited && 
+             state.title === '' && state.description === '') {
+                 return {
+                     title: props.idea.title,
+                     description: props.idea.description,
+                     isSubmited: false
+                 };
+             }
+         else if(state.isSubmited) {
+             return {
+                 title: '',
+                 description: '',
+                 isSubmited: false
+             };
+         }
+ 
+         return null;
+     }
+
     closeForm() {
         this.setState({
             title: '',
@@ -50,27 +71,6 @@ class IdeaUpdate extends Component {
         });
 
         this.props.updateIdea(this.props.idea, newIdea);
-    }
-
-    static getDerivedStateFromProps(props, state) {
-
-       if(props.isUpdateIdeaBoxOpen && !state.isSubmited && 
-            state.title === '' && state.description === '') {
-                return {
-                    title: props.idea.title,
-                    description: props.idea.description,
-                    isSubmited: false
-                };
-            }
-        else if(state.isSubmited) {
-            return {
-                title: '',
-                description: '',
-                isSubmited: false
-            };
-        }
-
-        return null;
     }
 
     render() {
