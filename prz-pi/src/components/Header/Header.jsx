@@ -50,7 +50,6 @@ export default class Header extends Component {
         );
     }
 }
-
 Header.propTypes = {
     set_expression: PropTypes.func.isRequired
 };

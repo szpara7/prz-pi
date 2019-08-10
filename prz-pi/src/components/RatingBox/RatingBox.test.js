@@ -31,6 +31,7 @@ describe('<RatingBox />', () => {
         var ratingBox = shallow(<RatingBox onLikeClick={onClick} onDislikeClick={onClick} likes={1} dislikes={2} />);
 
         ratingBox.find('button').first().simulate('click');
+        
         expect(onClick).toHaveBeenCalled();   
     })
 

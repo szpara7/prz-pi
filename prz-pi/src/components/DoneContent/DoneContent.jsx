@@ -28,8 +28,8 @@ class DoneContent extends Component {
                             <div className="row container-border justify-content-between">
                                 {this.props.done.filter(t => t.title.toUpperCase()
                                     .includes(this.props.searchExpression.toUpperCase())).map((item, key) =>
-                                    <DoneItem done={item} key={key} />
-                                )}
+                                        <DoneItem done={item} key={key} />
+                                    )}
                             </div>
                         </div>
                     </React.Fragment>

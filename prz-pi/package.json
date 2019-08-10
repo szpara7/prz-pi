@@ -23,6 +23,9 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.12.3",
     "prop-types": "^15.6.2",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.3",

@@ -24,9 +24,9 @@ class TodoContent extends Component {
                 <LoadingModal isLoading={this.props.isLoading} />
                 {show &&
                     <React.Fragment>
-                        <TodoCreateContainer />
+                        <TodoCreateContainer/>
                         <TodoUpdateContainer />
-                        <div className="container">
+                        <div className="container" >
                             <div className="row container-border justify-content-between">
                                 {this.props.todos.filter(t => t.title.toUpperCase()
                                     .includes(this.props.searchExpression.toUpperCase())).map((item, key) =>

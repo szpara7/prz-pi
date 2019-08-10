@@ -28,7 +28,6 @@ class DoneUpdate extends Component {
             };
         }
         else if(state.isSubmited) {
-
             return { 
                 isSubmited: false,
                 title: '',

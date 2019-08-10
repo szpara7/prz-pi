@@ -72,7 +72,7 @@ class TodoUpdate extends Component {
         };
 
         this.setState({
-            isSubmited: true
+            isSubmited: true 
         });        
 
         this.props.updateTodo(this.props.todo, newTodo);

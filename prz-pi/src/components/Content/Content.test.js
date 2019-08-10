@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import Content from './Content';
 
 
-describe('<Header />', () => {
+describe('<Content />', () => {
     it('sie renderuje', () => {        
         var header = shallow(<Content />);
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 import IdeaContainer from '../../containers/IdeaContainer.jsx';
 import TodoContainer from '../../containers/TodoContainer.jsx';
@@ -10,11 +10,14 @@ class Content extends Component {
 	render() {
 		return (
 			<div className="container-fluid">	
-				<Redirect from='/' to='/idea' />
+								
 				<Route exact path='/idea' component={IdeaContainer} />
 				<Route path='/todo' component={TodoContainer} />
 				<Route path='/inProgress' component={InProgressContainer} />
 				<Route path='/done' component={DoneContainer} />
+				<Redirect from='/' to='/idea' />
+			
+				
 			</div>
 		);
 	}

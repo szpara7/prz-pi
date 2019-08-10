@@ -19,7 +19,7 @@ let done = [
     { id: 1, title: "Done2", description: "Description2", likes: 4, dislikes: 6, startDate: "08.11.2018 21:15:17", endDate: "08.11.2018 21:17:50", userId: 1, modelStatus: 4 }]
 
 
-describe('<DoneContent />', () => {
+ describe('<DoneContent />', () => {
     it('sie renderuje', () => {
         var mock = shallow(<DoneContent fetchDoneList={mockFunction} fetchUsers={mockFunction} isLoading={false} done={done} searchExpression={""} />);
 

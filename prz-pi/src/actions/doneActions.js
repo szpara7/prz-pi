@@ -31,7 +31,7 @@ export const fetchDoneList = () => {
             .catch(e => {
                 dispatch(fetch_done_failure(e));
                 dispatch(NOTIFICATION_ACTIONS.notification_error(responseMessages.FETCH_DONE_FAILURE));
-            })
+            });
     }
 }
 
